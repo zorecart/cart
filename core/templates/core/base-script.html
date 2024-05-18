@@ -1,0 +1,160 @@
+{% load static %}
+
+    <script>
+        // Wait for the page to finish loading
+        window.addEventListener("load", function () {
+            // Find the global-loader div
+            var globalLoader = document.getElementById("global-loader");
+
+            // Display the loader for 2 seconds, then hide it
+            setTimeout(function () {
+                globalLoader.style.display = "none";
+            }, 1000); // 2000 milliseconds (2 seconds)
+        });
+    </script>
+
+
+                <style>
+                        .top-nav-message {
+                            position: relative;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            width: 100%;
+                            height: 40px; /* Fixed height to prevent shifting */
+                            background-color: transparent; /* Transparent background */
+                            display: flex;
+                            align-items: center; /* Center vertically */
+                        }
+
+                        .message-container {
+                            display: inline-block;
+                            position: relative;
+                            left: 100%; /* Start off-screen to the right */
+                        }
+
+                        .scrolling-message {
+                            display: inline-block;
+                            white-space: nowrap;
+                            font-size: 16px; /* Adjust font size for better visibility */
+                            font-weight: bold; /* Make the text bold */
+                            color: #000; /* Text color (adjust as needed) */
+                        }
+
+                        @keyframes scroll-left {
+                            0% {
+                                left: 100%;
+                            }
+                            100% {
+                                left: -100%;
+                            }
+                        }
+                </style>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const messages = [
+                            "Discover the latest in tech! Shop our top-rated phones, laptops, and accessories with unbeatable prices. Enjoy fast shipping and excellent customer service. Upgrade your tech game today!",
+                            "Welcome to your one-stop tech shop! Find the newest phones, cutting-edge laptops, and essential accessories all in one place. Enjoy exclusive discounts and free shipping on all orders. Shop now and stay ahead of the curve!",
+                            "Get the best deals on the hottest tech! From smartphones to laptops and must-have accessories, we have everything you need. Shop now and experience top-quality products with fast and reliable shipping. Don't miss out!",
+                            "Upgrade your tech with our latest arrivals! Explore a wide range of phones, laptops, and accessories at unbeatable prices. Enjoy seamless shopping with fast delivery and top-notch customer support. Shop the future of technology today!",
+                            "Stay connected with the latest tech trends! Discover our wide selection of smartphones, laptops, and accessories. Enjoy amazing deals, fast shipping, and exceptional customer service. Shop now and enhance your digital lifestyle!"
+                        ];
+
+                        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                        const randomDelay = Math.random() * 3 + 1; // Random delay between 1 and 4 seconds
+
+                        const messageContainer = document.querySelector('.message-container');
+                        const scrollingMessage = document.querySelector('.scrolling-message');
+
+                        scrollingMessage.textContent = randomMessage;
+                        messageContainer.style.animation = `scroll-left 15s linear infinite ${randomDelay}s`; // Apply random delay
+                    });
+                </script>
+
+
+
+
+
+
+
+
+                    <script type="text/javascript">
+                        // <![CDATA[
+                        function googleTranslateElementInit() {
+                            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                        }
+                        // ]]>
+                    </script>
+
+                    <script type="text/javascript">
+                        function googleTranslateElementInit2() {
+                            new google.translate.TranslateElement({
+                                pageLanguage: 'en',
+                                includedLanguages: 'es,en,pt,fr',
+                                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                                autoDisplay: false
+                            }, 'google_translate_element2');
+                        }
+                    </script>
+
+                    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit2"></script>
+
+                    <script type="text/javascript">
+                        eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('6 7(a,b){n{4(2.9){3 c=2.9("o");c.p(b,f,f);a.q(c)}g{3 c=2.r();a.s(\'t\'+b,c)}}u(e){}}6 h(a){4(a.8)a=a.8;4(a==\'\')v;3 b=a.w(\'|\')[1];3 c;3 d=2.x(\'y\');z(3 i=0;i<d.5;i++)4(d[i].A==\'B-C-D\')c=d[i];4(2.j(\'k\')==E||2.j(\'k\').l.5==0||c.5==0||c.l.5==0){F(6(){h(a)},G)}g{c.8=b;7(c,\'m\');7(c,\'m\')}}',43,43,'||document|var|if|length|function|GTranslateFireEvent|value|createEvent||||||true|else|doGTranslate||getElementById|google_translate_element|innerHTML|change|try|HTMLEvents|initEvent|dispatchEvent|createEventObject|fireEvent|on|catch|return|split|getElementsByTagName|select|for|className|goog|te|combo|null|setTimeout|500'.split('|'),0,{}))
+                        $(function(){
+                            $('.selectpicker').selectpicker();
+                        });
+                    </script>
+
+                    <style>
+                    /* Hide the Google Translate iframe */
+                    iframe.VIpgJd-ZVi9od-ORHb-OEVmcd {
+                        display: none !important;
+                    }
+
+                    /* Hide the Google Translate banner */
+                    .goog-te-banner-frame.skiptranslate {
+                        display: none !important;
+                    }
+
+                    /* Hide the Google Translate widget */
+                    body {
+                        top: 0px !important;
+                    }
+                    </style>
+<style>
+    .sidebar-inner {
+        height: 100%; /* Set the height to 100% of its container */
+        overflow-y: auto; /* Enable vertical scrolling */
+        scrollbar-width: thin; /* For Firefox */
+        scrollbar-color: transparent transparent; /* For Firefox */
+    }
+
+    /* For WebKit browsers (Chrome, Safari) */
+    .sidebar-inner::-webkit-scrollbar {
+        width: 6px; /* Set the width of the scrollbar */
+        scrollbar-color: transparent transparent; /* For Firefox */
+
+    }
+
+    .sidebar-inner::-webkit-scrollbar-thumb {
+        background-color: transparent; /* Set the color of the scrollbar thumb */
+    }
+</style>
+                <!-- content @e -->
+                <!-- footer @s -->
+    <script src="{% static 'assetss/js/jquery-3.6.0.min.js' %}"></script>
+
+    <script src="{% static 'assetss/js/feather.min.js' %}"></script>
+
+    <script src="{% static 'assetss/js/jquery.slimscroll.min.js' %}"></script>
+
+    <script src="{% static 'assetss/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'assetss/js/dataTables.bootstrap4.min.js' %}"></script>
+
+    <script src="{% static 'assetss/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'assetss/plugins/apexchart/apexcharts.min.js' %}"></script>
+    <script src="{% static 'assetss/plugins/apexchart/chart-data.js' %}"></script>
+
+    <script src="{% static 'assetss/js/script.js' %}"></script>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+{% load static %}
+
+    <html lang="en">
+	<head>
+	    <!-- Required meta tags -->
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="description" content="Get Your Legit Websites for Consignment, Crypto Investment, Finance, and More. Boost your digital presence with ease.">
+
+	    <!-- Favicon -->
+	    <link rel="shortcut icon" href="https://res.cloudinary.com/djl5rhevy/image/upload/v1700596239/casoutFG-removebg-preview_syqvyd.png" type="image/x-icon">
+	    
+	    <!-- External CSS libraries -->
+	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+	    <link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.min.css' %}">
+	    
+	    <!-- Your website's main CSS -->
+	    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+
+	    <!-- Title -->
+		<title>FormatHub - Get Your Legit Websites for Billing, Crypto Investment, Finance, and More</title>
+
+	    <!-- Additional meta tags for SEO -->
+	    <meta name="keywords" content="digital assets, websites, documents, online services, buy, sell, formats">
+	    <meta name="author" content="FormatHub">
+	    <meta name="robots" content="index, follow">
+
+	    <!-- Open Graph metadata for WhatsApp and YouTube -->
+	    <meta property="og:title" content="FormatHub -Your Ultimate Platform for Guaranteed Cash Out">
+	    <meta property="og:description" content="Legit Websites for Billing, Crypto Investment, Finance, and More. Boost your digital presence with ease.">
+	    <meta property="og:image" content="https://res.cloudinary.com/djl5rhevy/image/upload/v1700493239/cash1_ncyypt.png">
+	    <meta property="og:url" content="https://www.formathub.store">
+	    
+
+
+	    <!-- Structured Data for WhatsApp -->
+	    <meta property="og:whatsapp" content="https://www.formathub.store">
+	    
+	    <!-- Canonical URL -->
+	    <link rel="canonical" href="https://www.formathub.store">
+
+	    <!-- Google Fonts (if used) -->
+	    <link href="https://fonts.googleapis.com/css?family=Your+Font" rel="stylesheet">
+
+	    <!-- Google Analytics or other tracking code (if applicable) -->
+
+	</head>
+<script src="//code.tidio.co/v3b2yrkeorkp9l5dnmwmvym3tcgbii9m.js" async></script>
+    <body>
+        <!--==================== HEADER ====================-->
+        <header class="header" id="header">
+            <nav class="nav container">
+                <a href="#" class="nav__logo">
+                    <img style="width: 40px;" src="{% static 'ffg.png' %}" alt="" class="nav__logo-img">
+                    FormatHub
+                </a>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="#home" class="nav__link active-link">Home</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav__item">
+                            <a href="{% url 'accounts:logout' %}" class="nav__link">Sign Out</a>
+                        </li>
+                        {% else %}
+                        <li class="nav__item">
+                            <a href="{% url 'accounts:login' %}" class="nav__link">Sign In</a>
+                        </li>
+                        {% endif %}                    
+                        <li class="nav__item">
+                            <a href="#trick" class="nav__link">Samples</a>
+                        </li>
+
+                        <li class="nav__item">
+                            <a href="#new" class="nav__link">New</a>
+                        </li>
+
+                        <a href="{% url 'giftweb:contact' %}" class="button button--ghost">Contact Us</a>
+                    </ul>
+
+                    <div class="nav__close" id="nav-close">
+                        <i class='bx bx-x'></i>
+                    </div>
+
+                    <img src="{% static 'assets/img/nav-img.png' %}" alt="" class="nav__img">
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-grid-alt'></i>
+                </div>
+
+            </nav>
+        </header>
+
+        <main class="main">
+            <!--==================== HOME ====================-->
+			<section class="home container" id="home">
+			    <div class="swiper home-swiper">
+			        <div class="swiper-wrapper">
+			            <!-- HOME SLIDER 1 -->
+			            <section class="swiper-slide">
+			                <div class="home__content grid">
+			                    <div class="home__group">
+			                        <img src="{% static 'cash1.png' %}" alt="" class="home__img">
+			                        <div class="home__indicator"></div>
+
+			                        <div class="home__details-img">
+			                            <h4 class="home__details-title">Discover Authentic Websites</h4>
+			                            <span class="home__details-subtitle">Your Trusted Source</span>
+			                        </div>
+			                    </div>
+
+			                    <div class="home__data">
+			                        <h3 class="home__subtitle">Explore Diverse Categories</h3>
+			                        <h1 class="home__title">Get Your Legit Website Now</h1>
+			                        <p class="home__description">Find websites in various categories, from consignment to crypto investment and finance. FormatHub offers a meticulously curated selection of legitimate websites to bolster and optimize your online presence.</p>
+
+			                        <div class="home__buttons">
+			                            <a href="{% url 'giftweb:home' %}" class="button">Browse Websites</a>
+			                        </div>
+			                    </div>
+			                </div>
+			            </section>
+
+			            <!-- HOME SLIDER 2 -->
+			            <section class="swiper-slide">
+			                <div class="home__content grid">
+			                    <div class="home__group">
+			                        <img src="{% static 'docu1.png' %}" alt="" class="home__img">
+			                        <div class="home__indicator"></div>
+
+			                        <div class="home__details-img">
+			                            <h4 class="home__details-title">Quality Documents and Graphics</h4>
+			                            <span class="home__details-subtitle">Boost Your Business</span>
+			                        </div>
+			                    </div>
+
+			                    <div class="home__data">
+			                        <h3 class="home__subtitle">Explore Our Collection</h3>
+			                        <h1 class="home__title">Enhance Your Digital Assets</h1>
+			                        <p class="home__description">Discover a wide-ranging collection of high-quality documents and graphics designed to elevate your business. FormatHub provides you with legitimate assets to help your brand thrive in the digital landscape.</p>
+
+			                        <div class="home__buttons">
+			                            <a href="{% url 'giftweb:documents' %}" class="button">Browse Documents</a>
+			                        </div>
+			                    </div>
+			                </div>
+			            </section>
+
+			            <!-- HOME SLIDER 3 -->
+			            <section class="swiper-slide">
+			                <div class="home__content grid">
+			                    <div class="home__group">
+			                        <img src="{% static 'ref2.png' %}" alt="" class="home__img">
+			                        <div class="home__indicator"></div>
+
+			                        <div class="home__details-img">
+			                            <h4 class="home__details-title">Unlock FormatHub Services</h4>
+			                            <span class="home__details-subtitle">Your Gateway to Digital Success</span>
+			                        </div>
+			                    </div>
+
+			                    <div class="home__data">
+			                        <h3 class="home__subtitle">Refer and Earn</h3>
+			                        <h1 class="home__title">Get up to 30% Referral Rewards</h1>
+			                        <p class="home__description">Join FormatHub's referral program and start earning generous rewards of up to 30% whenever the person you refer purchases any type of website. Sign in to access your unique referral link/code and begin sharing the advantages of FormatHub with others to enhance your digital success.</p>
+
+			                        <div class="home__buttons">
+			                            <a href="{% url 'core:referral' %}" class="button">Join Referral Program</a>
+			                        </div>
+			                    </div>
+			                </div>
+			            </section>
+
+			        </div>
+		        <div class="swiper-pagination"></div>
+
+		        <!-- Swipe Instructions -->
+		        <div class="swiper-instructions">
+		            <p>Swipe left or right to explore more</p>
+		        </div>
+        			    </div>
+			</section>
+			<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+			<script>
+			  document.addEventListener("DOMContentLoaded", function () {
+			    var swiper = new Swiper(".home-swiper", {
+			      slidesPerView: 1, // Number of slides to show
+			      spaceBetween: 0, // Space between slides
+			      loop: true, // Enable loop mode
+			      autoplay: {
+			        delay: 7000, // Delay in milliseconds (5 seconds)
+			        disableOnInteraction: false, // Continue autoplay after user interactions
+			      },
+			      pagination: {
+			        el: ".swiper-pagination",
+			        clickable: true, // Enable pagination bullets
+			      },
+			    });
+			  });
+			</script>
+            
+            <!--==================== CATEGORY ====================-->
+			<section class="section category">
+			    <h2 class="section__title">Explore Our <br> Featured Categories</h2>
+
+			    <div class="category__container container grid">
+			        <div class="category__data">
+			           <a href="{% url 'giftweb:home' %}"> <img  src="{% static 'web1.png' %}" alt="" class="category__img"></a>
+			            <h3 class="category__title">Websites</h3>
+			            <p class="category__description">Browse through a variety of legitimate websites for your online ventures.</p>
+			        </div>
+
+			        <div class="category__data">
+			            <a href="{% url 'giftweb:documents' %}"><img src="{% static 'docu2.png' %}" alt="" class="category__img"></a>
+			            <h3 class="category__title">Documents</h3>
+			            <p class="category__description">Enhance your business with high-quality documents and graphics.</p>
+			        </div>
+
+			        <div class="category__data">
+			            <a href="{% url 'core:referral' %}"><img src="{% static 'ref1.png' %}" alt="" class="category__img"></a>
+			            <h3 class="category__title">Referral Program</h3>
+			            <p class="category__description">Join our referral program and earn rewards by sharing FormatHub with others.</p>
+			        </div>
+			    </div>
+			</section>
+
+
+            <!--==================== ABOUT ====================-->
+			<section class="section about" id="about">
+			    <div class="about__container container grid">
+			        <div class="about__data">
+			            <h2 class="section__title about__title">About FormatHub</h2>
+			            <p class="about__description">
+			                FormatHub is your premier source for a diverse range of digital assets to elevate your online presence.
+			                We specialize in providing top-quality websites of any type, including Finance, Crypto, Consignment, and more, tailored to your unique needs.
+			            </p>
+			            <p class="about__description" id="moreDescription" style="display: none;">
+			                Our mission is to empower you with the tools and resources you need to succeed in the digital landscape.
+			                Whether you're looking to launch a new website, enhance your brand with stunning documents, or earn rewards through our referral program, FormatHub has you covered.
+			            </p>
+			            <a href="javascript:void(0);" class="button" id="readMoreButton">Read More</a>
+			        </div>
+
+			        <img src="{% static 'assets/img/about-img.png' %}" alt="" class="about__img">
+			    </div>
+			</section>
+
+			<script>
+			    // JavaScript to toggle the "Read more" content
+			    var moreDescription = document.getElementById("moreDescription");
+			    var readMoreButton = document.getElementById("readMoreButton");
+
+			    readMoreButton.addEventListener("click", function() {
+			        if (moreDescription.style.display === "none") {
+			            moreDescription.style.display = "block";
+			            readMoreButton.innerText = "Read Less";
+			        } else {
+			            moreDescription.style.display = "none";
+			            readMoreButton.innerText = "Read More";
+			        }
+			    });
+			</script>
+
+
+
+
+            <!--==================== TRICK OR TREAT ====================-->
+<section class="section trick" id="trick">
+    <h2 class="section__title">Website Samples</h2>
+
+    <div class="trick__container container grid">
+        <div class="trick__content">
+            <a href="/giftweb/product/8/"><img src="{% static 'fin1.png' %}" alt="" class="trick__img"></a>
+            <h3 class="trick__title">Finance Website</h3>
+            <span class="trick__subtitle">Explore our financial website templates.</span>
+            <button class="button trick__button">
+                <i class='bx bx-cart-alt trick__icon'></i>
+            </button>
+        </div>
+
+        <div class="trick__content">
+            <a href="giftweb/product/7/"><img src="{% static 'crypto1.png' %}" alt="" class="trick__img"></a>
+            <h3 class="trick__title">Crypto Investment Website</h3>
+            <span class="trick__subtitle">Discover crypto investment opportunities.</span>
+            <button class="button trick__button">
+                <i class='bx bx-cart-alt trick__icon'></i>
+            </button>
+        </div>
+
+        <div class="trick__content">
+            <a href="giftweb/product/4/"><img src="{% static 'shi.png' %}" alt="" class="trick__img"></a>
+            <h3 class="trick__title">Consignment Website</h3>
+            <span class="trick__subtitle">Buy and sell consignment items online.</span>
+            <button class="button trick__button">
+                <i class='bx bx-cart-alt trick__icon'></i>
+            </button>
+        </div>
+
+        <div class="trick__content">
+            <a href="giftweb/product/19/"><img src="{% static 'music.jpg' %}" alt="" class="trick__img"></a>
+            <h3 class="trick__title">Music Website</h3>
+            <span class="trick__subtitle">Explore music-related websites and services.</span>
+            <button class="button trick__button">
+                <i class='bx bx-cart-alt trick__icon'></i>
+            </button>
+        </div>
+
+        <div class="trick__content">
+            <a href="giftweb/product/10/"><img src="{% static 'hook1.jpg' %}" alt="" class="trick__img"></a>
+            <h3 class="trick__title">Hook-Up Link Website</h3>
+            <span class="trick__subtitle">Discover networking and social connection websites.</span>
+            <button class="button trick__button">
+                <i class='bx bx-cart-alt trick__icon'></i>
+            </button>
+        </div>
+
+        <div class="trick__content">
+            <a href="giftweb/product/17/"><img src="{% static 'agent.jpg' %}" alt="" class="trick__img"></a>
+            <h3 class="trick__title">Job Agency Website</h3>
+            <span class="trick__subtitle">Explore job listings and employment services.</span>
+            <button class="button trick__button">
+                <i class='bx bx-cart-alt trick__icon'></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+            
+            <!--==================== DISCOUNT ====================-->
+            <section class="section discount">
+                <div class="discount__container container grid">
+                    <div class="discount__data">
+                        <h2 class="discount__title">50% Discount <br> On New Products</h2>
+                        <a href="{% url 'giftweb:home' %}" class="button">Go to new</a>
+                    </div>
+
+                    <img src="{% static 'discount.png' %}" alt="" class="discount__img">
+                </div>
+            </section>
+
+            <!--==================== NEW ARRIVALS ====================-->
+			<section class="section new" id="new">
+			    <h2 class="section__title">New Arrivals</h2>
+
+			    <div class="new__container container">
+			        <div class="swiper new-swiper">
+			            <div class="swiper-wrapper">
+			                <div class="new__content swiper-slide">
+			                    <div class="new__tag">New</div>
+			                    <img src="{% static 'mark.png' %}" alt="" class="new__img">
+			                    <h3 class="new__title">Marketplace Website</h3>
+			                    <span class="new__subtitle">Start your online marketplace.</span>
+			                    
+			                    <div class="new__prices">
+			                        <span class="new__price">$99.99</span>
+			                        <span class="new__discount">$149.99</span>
+			                    </div>
+
+			                    <button class="button new__button">
+			                        <i class='bx bx-cart-alt new__icon'></i>
+			                    </button>
+			                </div>
+
+			                <div class="new__content swiper-slide">
+			                    <div class="new__tag">New</div>
+			                    <img src="https://listability.com/wp-content/uploads/2021/04/business-email-lists-500x383@2x.jpeg" alt="" class="new__img">
+			                    <h3 class="new__title">.Com Business Email</h3>
+			                    <span class="new__subtitle">Professional email for your business.</span>
+
+			                    <div class="new__prices">
+			                        <span class="new__price">$19.99/month</span>
+			                    </div>
+
+			                    <button class="button new__button">
+			                        <i class='bx bx-cart-alt new__icon'></i>
+			                    </button>
+			                </div>
+
+			                <div class="new__content swiper-slide">
+			                    <div class="new__tag">New</div>
+			                    <img src="https://cdn.dribbble.com/userupload/2850411/file/original-5869e66eb7f70262051f0cb3062c59b3.png?compress=1&resize=752x" alt="" class="new__img">
+			                    <h3 class="new__title">Shipment Website</h3>
+			                    <span class="new__subtitle">Manage your shipments online.</span>
+
+			                    <div class="new__prices">
+			                        <span class="new__price">$49.99</span>
+			                    </div>
+
+			                    <button class="button new__button">
+			                        <i class='bx bx-cart-alt new__icon'></i>
+			                    </button>
+			                </div>
+
+			                <div class="new__content swiper-slide">
+			                    <div class="new__tag">New</div>
+			                    <img src="https://e3.365dm.com/20/02/2048x1152/skynews-new-uk-passport-blue-passport_4926746.jpg?20200221160432" alt="" class="new__img">
+			                    <h3 class="new__title">ID Cards</h3>
+			                    <span class="new__subtitle">Design and print ID cards.</span>
+
+			                    <div class="new__prices">
+			                        <span class="new__price">$29.99</span>
+			                        <span class="new__discount">$39.99</span>
+			                    </div>
+
+			                    <button class="button new__button">
+			                        <i class='bx bx-cart-alt new__icon'></i>
+			                    </button>
+			                </div>
+
+			                <div class="new__content swiper-slide">
+			                    <div class="new__tag">New</div>
+			                    <img src="https://cdn.dribbble.com/users/3161038/screenshots/13099781/media/4ba1520ee39f6710ace97da1ba3588f2.png" alt="" class="new__img">
+			                    <h3 class="new__title">Online Banking Website</h3>
+			                    <span class="new__subtitle">Manage your finances online.</span>
+
+			                    <div class="new__prices">
+			                        <span class="new__price">$89.99</span>
+			                    </div>
+
+			                    <button class="button new__button">
+			                        <i class='bx bx-cart-alt new__icon'></i>
+			                    </button>
+			                </div>
+
+			                <div class="new__content swiper-slide">
+			                    <div class="new__tag">New</div>
+			                    <img src="{% static 'air3.jpg' %}" alt="" class="new__img">
+			                    <h3 class="new__title">Airline Website</h3>
+			                    <span class="new__subtitle">Book flights and manage reservations.</span>
+
+			                    <div class="new__prices">
+			                        <span class="new__price">$159.99</span>
+			                    </div>
+
+			                    <button class="button new__button">
+			                        <i class='bx bx-cart-alt new__icon'></i>
+			                    </button>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</section>
+
+
+            <!--==================== OUR NEWSLETTER 
+            <section style="padding-bottom: 1px;" class="section newsletter">
+                <div class="newsletter__container container">
+                    <h2 class="section__title">Our Newsletter</h2>
+                    <p class="newsletter__description">
+                        Promotion new products and sales. Directly to your inbox
+                    </p>
+
+                    <form action="" class="newsletter__form">
+                        <input type="text" placeholder="Enter your email" class="newsletter__input">
+                        <button class="button">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </main>
+====================-->
+            <section style="padding-bottom: 1px;" class="section newsletter">
+                <div class="newsletter__container container">
+                    <h2 class="section__title">IMPORTANT !!</h2>
+                    <p class="newsletter__description">
+                        Read briefly Our  Terms of Services and Policy
+                    </p>
+
+					<button class="button" onclick="window.location.href='{% url 'giftweb:policy' %}'">
+					    Terms of Service and Policy
+					</button>
+
+                </div>
+            </section>
+        <!--==================== FOOTER ====================-->
+            <footer style="padding-top:0px;" class="footer section">
+
+                <span class="footer__copy">&#169; FormatHub ⭐. All rigths reserved<br><img style="width:90px;" src="{% static 'fgg.png' %}" alt> </span>
+
+
+                <img style="width:40px;" src="/" alt="" class="footer__img-one">
+                <img style="width:40px;" src="/" alt="" class="footer__img-two">
+            </footer>
+
+            <!--=============== SCROLL UP ===============-->
+            <a href="#" class="scrollup" id="scroll-up">
+                <i class='bx bx-up-arrow-alt scrollup__icon'></i>
+            </a>
+        
+        <!--=============== SCROLL REVEAL ===============-->
+        <script src="{% static 'assets/js/scrollreveal.min.js' %}"></script>
+
+        <!--=============== SWIPER JS ===============-->
+        <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
+        
+        <!--=============== MAIN JS ===============-->
+        <script src="{% static 'assets/js/main.js' %}"></script>
+    </body>
+</html>

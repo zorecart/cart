@@ -1,0 +1,284 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+<style>
+    /* Custom styles for SweetAlert */
+    .swal2-popup {
+        font-family: 'Arial', sans-serif;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .swal2-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #4CAF50; /* Green color for title */
+        margin-bottom: 20px;
+    }
+
+    .swal2-content {
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .payment-options {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .payment-option {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        border-radius: 8px;
+        background-color: #f0f0f0;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .payment-option:hover {
+        background-color: #e0e0e0;
+    }
+
+    .payment-option img {
+        width: 30px;
+        margin-right: 15px;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const buyNowButton = document.querySelector('#buyNowButton', 'buyNowButton2');
+
+        if (buyNowButton) {
+            buyNowButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                showPaymentModal();
+            });
+        }
+    });
+
+    function showPaymentModal() {
+        Swal.fire({
+            title: 'Choose Payment Method',
+            showCloseButton: true,
+            html:
+                `<div class="payment-options">
+                    <div class="payment-option" onclick="buyWithGiftCard()">
+                        <img src="https://cdn.redmondpie.com/wp-content/uploads/2011/07/Apple-Logo.png" alt="Gift Card">
+                        <span>Buy With Gift Card</span>
+                    </div>
+                    <div class="payment-option" onclick="buyWithCrypto()">
+                        <img src="https://freepngimg.com/thumb/bitcoin/59526-cryptocurrency-badge-bitcoin-gold-png-file-hd.png" alt="Crypto">
+                        <span>Buy with Crypto</span>
+                    </div>
+                    <div class="payment-option" onclick="buyWithCash()">
+                        <img src="https://w7.pngwing.com/pngs/178/28/png-transparent-computer-icons-money-bag-bank-cash-angle-hand-investment-thumbnail.png" alt="Cash">
+                        <span>Buy with Cash Transfer</span>
+                    </div>
+                 </div>`,
+            showClass: {
+                popup: 'animate__animated animate__fadeInUp animate__faster'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutDown animate__faster'
+            }
+        });
+    }
+
+    function buyWithGiftCard() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Buy with Gift Card selected',
+            timer: 1500,
+            showConfirmButton: false
+        }).then(() => {
+            window.location.href = '{% url 'giftweb:make_payment' model_name='product' product_id=product.id %}'; // Redirect to the gift card page
+        });
+    }
+
+    function buyWithCrypto() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Buy with Crypto selected',
+            timer: 1500,
+            showConfirmButton: false
+        }).then(() => {
+            window.location.href = '{% url 'giftweb:make_crypto_payment' model_name='product' product_id=product.id %}'; // Redirect to the crypto payment page
+        });
+    }
+
+    function buyWithCash() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Buy with Cash Transfer selected',
+            text: 'Contact the live chat support for a secured cash transfer.',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            // You can add additional logic here if needed
+        });
+    }
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<style>
+    /* Custom styles for improved appearance */
+    .swiper-container {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .swiper-slide {
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .swiper-slide h3 {
+        font-size: 1.5rem;
+        margin: 10px 0;
+        color: #333;
+    }
+
+    .swiper-slide p {
+        font-size: 1rem;
+        color: #777;
+    }
+
+    .swiper-slide img {
+        max-width: 60px;
+        border-radius: 50%;
+        margin: 10px 0;
+    }
+
+    .swiper-slide .stars {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .swiper-slide .stars span {
+        color: #FFD700;
+        font-size: 1.5rem;
+    }
+</style>
+
+
+
+
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        autoplay: {
+            delay: 3000, // 3 seconds
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
+<style>
+    /* Add styles for the full-screen modal */
+    .modal-xl { /* Increase the modal size here */
+        max-width: 95%; /* Adjust the maximum width as needed */
+    }
+
+    .image-grid-fullscreen {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+    }
+</style> 
+       <style>
+            .gallery-container {
+                position: relative;
+                width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+
+            .image-grid {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                overflow-x: auto;
+                scroll-behavior: smooth; /* Add smooth scrolling behavior */
+            }
+
+            .user-photo {
+                margin-right: 20px;
+            }
+
+            .scroll-button {
+                background-color: rgba(255, 255, 255, 0.8);
+                padding: 5px;
+                cursor: pointer;
+                z-index: 1;
+            }
+
+            .scroll-left-button {
+                margin-right: 10px; /* Add some spacing between buttons */
+            }
+
+            .scroll-right-button {
+                margin-left: 10px; /* Add some spacing between buttons */
+            }
+        </style>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const scrollLeftButton = document.querySelector('.scroll-left-button');
+        const scrollRightButton = document.querySelector('.scroll-right-button');
+        const imageGrid = document.querySelector('.image-grid');
+        const viewFullscreenButton = document.querySelector('.view-fullscreen-button');
+        const fullscreenModal = document.getElementById('fullscreen-modal');
+
+        scrollLeftButton.addEventListener('click', () => {
+            imageGrid.scrollBy({
+                left: -150,
+                behavior: 'smooth',
+            });
+        });
+
+        scrollRightButton.addEventListener('click', () => {
+            imageGrid.scrollBy({
+                left: 150,
+                behavior: 'smooth',
+            });
+        });
+
+        viewFullscreenButton.addEventListener('click', () => {
+            // Show the full-screen modal
+            fullscreenModal.style.display = 'block';
+        });
+
+        // Close the full-screen modal when the close button or the modal footer button is clicked
+        const closeModalButton = document.querySelector('.modal .close');
+        closeModalButton.addEventListener('click', () => {
+            fullscreenModal.style.display = 'none';
+        });
+
+        const modalFooterCloseButton = document.querySelector('.modal-footer button');
+        modalFooterCloseButton.addEventListener('click', () => {
+            fullscreenModal.style.display = 'none';
+        });
+    });
+</script>

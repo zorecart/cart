@@ -1,0 +1,196 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+{% load static %}
+{% include "core/messages.html" %}
+
+
+
+    <body>
+
+
+        <div class="main-wrapper">
+
+
+
+            <div style="padding-top: 11px;" class="page-wrapper">
+
+
+                        <section class="comp-section">
+                            <div class="section-header">
+                                <h3 class="section-title">Welcome</h3>
+                                <div class="line"></div>
+                            </div>
+                                <div class="col-md-6">
+                                    <div class="card bg-white">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Account Details</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <ul class="nav nav-tabs nav-tabs-solid nav-justified">
+                                                <li class="nav-item"><a class="nav-link active" href="#solid-justified-tab1" data-bs-toggle="tab">Referrals</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="#solid-justified-tab2" data-bs-toggle="tab">Your Profile</a></li>
+                                            </ul>
+                                            <div class="tab-content table-responsive">
+                                                <div class="tab-pane  show active" id="solid-justified-tab1">
+                                                    <table class="table table-hover mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Mails</th>
+                                                                <th>Status</th>
+                                                                <th>Date</th>
+                                                            </tr>
+                                                        </thead>
+                                                    <tbody>
+                                                        {% if my_recs %}
+                                                            {% for recommended_user in my_recs %}
+                                                                <tr>
+                                                                    <td>{{ recommended_user.user }}</td>
+                                                                    
+                                                                    <td>{{ recommended_user.user.account.status }}</td>
+                                                                    <td>{{ recommended_user.user.date_joined|date:"F j, Y" }}</td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            <tr>
+                                                                <td colspan="4">You have not recommended anyone yet</td>
+                                                            </tr>
+                                                        {% endif %}
+                                                    </tbody>
+
+                                                    </table>                                                
+                                                </div>
+                                                <div class="tab-pane" id="solid-justified-tab2">
+
+                                                    <table class="table table-hover mb-0">
+                                                    <thead>
+                                                    <tr>
+                                                    <th>Username</th>
+                                                    <th>Verification</th>
+                                                    <th>Email</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                    <td>{{ user.username|title }}</td>
+                                                    <td>{{ user.status }}</td>
+                                                    <td>{{ user.email }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td>Account Id</td>
+                                                    <td>{{ user.account_no }}</td>
+                                                    <td>---</td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td>Account Balance</td>
+                                                    <td>$ {{ user.balance }}</td>
+                                                    <td>---</td>
+                                                    </tr>
+                                                    </tbody>
+                                                    </table>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </section>
+
+                <div class="content">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h4>Profile Picture</h4>
+                        </div>
+                    </div>
+                    <div class="comp-sec-wrapper">
+
+                        <section class="comp-section comp-cards">
+
+                                <div class="col-12 col-md-6 col-lg-4 d-flex">
+                                    <div class="card flex-fill bg-white">
+                                        <img style="max-width:300px;" alt="Card Image" src="{{ user.account.picture.url }}" class="card-img-top" />
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Discover a World of Exclusive Rewards by Referring Friends</h5>
+                                        </div>
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Elevate Your Experience – Refer Your Friends and Earn Up to 30% in Exciting Rewards!</h5>
+                            </div>
+                            <div class="card-body">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+        <div class="clipboard">
+            <form class="form-horizontal">
+                <input type="text" class="form-control mb-4" id="input-copy" value="http://127.0.0.1:8000/core/ref/{{ user.profile.code }}/{{ user.username }}">
+                <a id="copy-link" class="mb-1 btn clip-btn btn-primary" href="javascript:;" data-clipboard-action="copy" data-clipboard-target="#input-copy"><i class="far fa-copy"></i> Copy Ref Link</a>
+            </form>
+            <div id="copy-message" class="copy-message">Link copied!</div>
+        </div>
+        <style>
+            .copy-message {
+                background-color: #4CAF50; /* Green background color */
+                color: white; /* White text color */
+                padding: 10px; /* Padding around the message */
+                border-radius: 5px; /* Rounded corners */
+                display: none;
+                position: absolute;
+                top: 65px; /* Adjust the distance from the top as needed */
+                right: 0;
+                margin-top: 0; /* Adjust the margin as needed */
+            }
+        </style>
+
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var clipboard = new ClipboardJS('#copy-link');
+
+                clipboard.on('success', function(e) {
+                    e.clearSelection();
+                    var copyMessage = document.getElementById('copy-message');
+                    copyMessage.style.display = 'block';
+
+                    // Hide the message after a short delay (e.g., 2 seconds)
+                    setTimeout(function() {
+                        copyMessage.style.display = 'none';
+                    }, 2000); // 2000 milliseconds = 2 seconds
+                });
+
+                clipboard.on('error', function(e) {
+                    console.error('Failed to copy the link to clipboard');
+                });
+            });
+        </script>
+
+
+
+                            </div>
+                        </div>
+
+                                        <div class="card-body">
+                                            <p class="card-text">Share Your Unique Referral Link for a Chance to Unlock Amazing Benefits and Perks.</p>
+                                            <a class="btn btn-primary" href="{% url 'giftweb:contact' %}">Contact Us Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </section
+
+
+
+                </div>
+    </div>
+        </div>
+        </div>
+
+
+
+    </body>
+
+{% endblock %}
