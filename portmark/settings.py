@@ -1,7 +1,7 @@
 
 import os
 from pathlib import Path
-#import django_heroku
+import django_heroku
 
 import cloudinary
 import cloudinary.uploader
@@ -147,7 +147,7 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-#django_heroku.settings(locals())
+django_heroku.settings(locals())
 
 MESSAGE_TAGS = {
     messages.SUCCESS: 'alert-success',
