@@ -34,3 +34,4 @@ cloudinary
 django-ckeditor
 django-user-activity-log2
 django-admin-argon-dashboard
+django-countries
