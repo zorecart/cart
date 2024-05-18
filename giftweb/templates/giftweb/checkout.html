@@ -1,0 +1,553 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Card Transaction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+            transition: background-color 0.3s ease;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        h1.card-title {
+            font-size: 1.8rem;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        p.card-subtitle {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .gift-card-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .gift-card-container img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-card-container:hover img {
+            transform: rotate(360deg);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 12px 20px;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .switch {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .slider {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+
+        .slider input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider.round {
+            border-radius: 34px;
+            background-color: #ccc;
+            transition: background-color 0.3s ease;
+        }
+
+        .slider.round:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: #007bff;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
+
+        #theme-label {
+            margin-left: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #333; /* Ensure label color is visible in light mode */
+        }
+
+        .dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .card-body {
+                padding: 30px;
+            }
+
+            h1.card-title {
+                font-size: 2.2rem;
+            }
+
+            .gift-card-container img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .btn-primary {
+                padding: 14px 24px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+   <style>
+        .cancel-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #ffd700; /* Dim Yellow */
+            color: black; /* Text color */
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1.1rem;
+
+        }
+        .cancel-btn:hover {
+            background-color: #e3c300; /* Brighter Yellow on hover */
+        }
+        @media (min-width: 500px) {
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .card-body {
+                padding: 30px;
+            }
+
+            h1.card-title {
+                font-size: 0.8rem;
+                margin-bottom: 8px;
+
+            }
+            p.card-subtitle {
+                font-size: 0.8rem;
+                margin-bottom: 8px;
+
+            }
+
+            .gift-card-container img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .btn-primary {
+                padding: 8px 16px;
+                font-size: 1.1rem;
+            }
+        .dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+            
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title text-center">Complete Transaction with Gift Card</h1>
+                <p class="card-subtitle text-center">Select a gift card type to proceed: Apple, Amazon, Steam, or Xbox.</p>
+                <div class="gift-card-container text-center">
+                    <img src="https://cdn.redmondpie.com/wp-content/uploads/2011/07/Apple-Logo.png" alt="Apple Card">
+                    <h4>Apple Card</h4>
+                </div>
+
+<form method="post" enctype="multipart/form-data" class="payment-form">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="{{ form.amount.id_for_label }}">Transaction Value:</label>
+        <input type="text" class="form-control" id="amount" value="{{ product.price }}" readonly name="amount">
+    </div>
+    <div class="form-group">
+        <label for="{{ form.quantity.id_for_label }}">Quantity:</label>
+        <div class="quantity-container">
+            <button type="button" class="quantity-btn decrement">-</button>
+            {{ form.quantity }}
+            <button type="button" class="quantity-btn increment">+</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="{{ form.proof_of_pay.id_for_label }}">Card Photo:</label>
+        {{ form.proof_of_pay }}
+        <label for="{{ form.proof_of_pay.id_for_label }}">No document selected</label>
+        <img id="proof-preview" class="proof-preview" src="#" alt="Proof of Payment Preview" style="display: none;">
+    </div>
+
+    <div class="form-group">
+        <label id="file-label" for="id_gift_card_type">Select Gift Card Type:</label>
+        <div class="input-group">
+            {{ form.gift_card_type }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Code <i class="fas fa-gift"></i></label>
+        {{ form.code }}
+        {% if form.errors.code %}
+        <div class="text-danger">{{ form.errors.code }}</div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label>Country <i class="fas fa-globe"></i></label>
+        {{ form.country }}
+        {% if form.errors.country %}
+        <div class="text-danger">{{ form.errors.country }}</div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label>Recipient Name <i class="fas fa-user"></i></label>
+        {{ form.full_name }}
+        {% if form.errors.full_name %}
+        <div class="text-danger">{{ form.errors.full_name }}</div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label>Street Address <i class="fas fa-map-marker-alt"></i></label>
+        {{ form.street_address }}
+        {% if form.errors.street_address %}
+        <div class="text-danger">{{ form.errors.street_address }}</div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label>Apartment Address <i class="fas fa-home"></i></label>
+        {{ form.apartment_address }}
+        {% if form.errors.apartment_address %}
+        <div class="text-danger">{{ form.errors.apartment_address }}</div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label>Phone Number <i class="fas fa-phone"></i></label>
+        {{ form.phone_number }}
+        {% if form.errors.phone_number %}
+        <div class="text-danger">{{ form.errors.phone_number }}</div>
+        {% endif %}
+    </div>
+
+    <br>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="{% url 'giftweb:home' %}" class="cancel-btn">Cancel</a>
+</form>
+
+<div class="product-gallery">
+    {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    {% endif %}
+    {% if product.image2 %}
+        <img src="{{ product.image2.url }}" alt="{{ product.name }}">
+    {% endif %}
+    {% if product.image3 %}
+        <img src="{{ product.image3.url }}" alt="{{ product.name }}">
+    {% endif %}
+    {% if product.image4 %}
+        <img src="{{ product.image4.url }}" alt="{{ product.name }}">
+    {% endif %}
+    {% if product.image5 %}
+        <img src="{{ product.image5.url }}" alt="{{ product.name }}">
+    {% endif %}
+</div>
+
+<style>
+    .quantity-container {
+        display: flex;
+        align-items: center;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .quantity-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .quantity-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .quantity-btn:active {
+        transform: scale(0.95);
+    }
+
+    .quantity-btn.decrement {
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+
+    .quantity-btn.increment {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+    }
+
+    .proof-preview {
+        display: block;
+        width: 100px;
+        height: 100px;
+        margin-top: 10px;
+        border-radius: 5px;
+        border: 2px solid #007bff;
+        transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .proof-preview.animate {
+        transform: scale(1.1);
+        opacity: 0.9;
+    }
+
+    .product-gallery {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        gap: 10px;
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .product-gallery img {
+        max-height: 100px;
+        object-fit: cover;
+        border-radius: 5px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .product-gallery img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const quantityField = document.getElementById('id_quantity');
+        const amountField = document.getElementById('amount');
+        const productPrice = {{ product.price|floatformat:2 }};
+        const decrementBtn = document.querySelector('.quantity-btn.decrement');
+        const incrementBtn = document.querySelector('.quantity-btn.increment');
+        const proofInput = document.getElementById('id_proof_of_pay');
+        const proofPreview = document.getElementById('proof-preview');
+
+        function updateAmount() {
+            const quantity = parseInt(quantityField.value, 10);
+            const totalPrice = (quantity * productPrice).toFixed(2);
+            amountField.value = totalPrice;
+        }
+
+        decrementBtn.addEventListener('click', function () {
+            let quantity = parseInt(quantityField.value, 10);
+            if (quantity > 1) {
+                quantityField.value = --quantity;
+                updateAmount();
+            }
+        });
+
+        incrementBtn.addEventListener('click', function () {
+            let quantity = parseInt(quantityField.value, 10);
+            quantityField.value = ++quantity;
+            updateAmount();
+        });
+
+        quantityField.addEventListener('input', updateAmount);
+
+        proofInput.addEventListener('change', function () {
+            const file = proofInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    proofPreview.src = e.target.result;
+                    proofPreview.style.display = 'block';
+                    proofPreview.classList.add('animate');
+                    setTimeout(() => proofPreview.classList.remove('animate'), 500);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>
+
+
+
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <label class="switch" for="toggle-theme">
+            <input type="checkbox" id="toggle-theme">
+            <span class="slider round"></span>
+        </label>
+        <span id="theme-label">Light Mode</span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectElement = document.getElementById('id_gift_card_type');
+            const giftCardImgTop = document.querySelector('.gift-card-container img');
+            const giftCardName = document.querySelector('.gift-card-container h4');
+            const toggleTheme = document.getElementById('toggle-theme');
+            const themeLabel = document.getElementById('theme-label');
+
+            function updateGiftCard() {
+                const selectedOption = selectElement.value;
+
+                switch (selectedOption) {
+                    case 'apple':
+                        setGiftCard('Apple Card', 'https://cdn.redmondpie.com/wp-content/uploads/2011/07/Apple-Logo.png');
+                        break;
+                    case 'amazon':
+                        setGiftCard('Amazon Card', 'https://www.citypng.com/public/uploads/preview/-11596312183geendnnbmv.png');
+                        break;
+                    case 'steam':
+                        setGiftCard('Steam Card', 'https://cdn.wallpapersafari.com/58/91/rXpM7m.png');
+                        break;
+                    case 'xbox':
+                        setGiftCard('Xbox Card', 'https://i.pinimg.com/originals/e0/be/50/e0be5066ace675eb18bb130d95be81b9.png');
+                        break;
+                    default:
+                        setGiftCard('Apple Card', 'https://cdn.redmondpie.com/wp-content/uploads/2011/07/Apple-Logo.png');
+                        break;
+                }
+            }
+
+            function setGiftCard(cardName, imgUrl) {
+                giftCardImgTop.src = imgUrl;
+                giftCardImgTop.alt = cardName;
+                giftCardName.innerText = cardName;
+            }
+
+            selectElement.addEventListener('change', updateGiftCard);
+
+            toggleTheme.addEventListener('change', (event) => {
+                const mode = event.target.checked ? 'Dark Mode' : 'Light Mode';
+                document.body.classList.toggle('dark-mode');
+                themeLabel.innerText = mode;
+            });
+
+            updateGiftCard();
+        });
+    </script>
+</body>
+
+</html>

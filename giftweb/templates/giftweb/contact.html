@@ -1,0 +1,169 @@
+{% extends 'core/base.html' %}
+{% include "core/messages.html" %}
+
+
+
+{% block content %}
+{% include "core/messages.html" %}
+
+    {% load static %}
+    <div style="padding-top: 30px;" class="page-wrapper">
+        <div class="container">
+            <section class="hero contact-hero">
+                <h2>Contact Us</h2>
+                <p>Questions, feedback, or just want to chat? We've got you covered! Reach us via live chat, WhatsApp, or drop us an email using the form below. Your satisfaction is our priority!</p>
+            </section>
+
+            <section class="contact">
+                <div class="row">
+                    <div class="card col-md-6">
+                        <div class="contact-details">
+                            <h3>Get In Touch</h3>
+                            <h4>We Reply Within An Hour!</h4>
+                            <ul>
+                                <li>
+                                    <i class="uil uil-map-marker"></i>
+                                </li>
+                                <li>
+                                    <i class="uil uil-envelope-alt"></i>
+                                    <p>
+                                        email: <a href="javascript:void">support@zorevinacart.com</a>
+                                    </p>
+                                </li>
+
+                                <li>
+                                    <i class="uil uil-clock-ten"></i>
+                                    <p>Monday to Sunday: </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="max-height: 120px;" class="col-md-6">
+                        <div class="map-responsive">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3025.3602711675603!2d-73.96975118459585!3d40.68806247933444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24416947c2109%3A0xa9222878ea949822!2sM2QJ%2B6X%2C%20Brooklyn%2C%20NY%2C%20USA!5e0!3m2!1sen!2sng!4v1686580998223!5m2!1sen!2sng" width="100%" height="120" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card flex-fill form-details">
+                <div class="row">
+                    <div style="color:red;" class="col-md-6">
+                        <form action="{% url 'giftweb:contact' %}" method="POST" class="custom-form">
+                            {% csrf_token %}
+
+                            {% if user.is_authenticated %}
+                                <input type="hidden" name="user_id" value="{{ user.id }}">
+                            {% else %}
+                                <input type="hidden" name="user_id" value="0">
+                            {% endif %}
+                            <h5 class="card-title btn btn-primary"> Send Us A Message </h5>
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" name="name" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject">Subject:</label>
+                                <input type="text" name="subject" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message:</label>
+                                <textarea name="message" class="form-control" rows="5"></textarea>
+                            </div>
+
+                            <input type="submit" value="Send" class="btn btn-primary">
+                        </form>
+                    </div>
+                        <style>
+                            .custom-form {
+                            background: rgba(255, 255, 255, 0.7);
+                            padding: 20px;
+                            border-radius: 10px;
+                        }
+
+                        .custom-form label {
+                            font-weight: bold; /* Example: Make labels bold */
+                        }
+
+                        .custom-form input[type="text"],
+                        .custom-form input[type="email"],
+                        .custom-form textarea {
+                            width: 100%; /* Example: Make form fields 100% width */
+                            margin-bottom: 10px;
+                        }
+
+                        /* Add more CSS rules to customize the form as needed */
+
+                        </style>
+
+<div class="col-md-6 d-none d-md-block">
+    <div class="contact-people">
+        <div class="contact-person">
+            <img style="max-height:200px;" src="https://res.cloudinary.com/dsbfohkyg/image/upload/v1715937899/zorev-removebg-preview_yjvxc5.png" alt="Ora">
+            <p>
+                <span>ZOREVINA STORES All laptops, phones and gadgets</span>Best Conditions<br>
+                <br>
+                Email: support@zorevinacart.com
+            </p>
+        </div>
+    </div>
+</div>
+
+                </div>
+            </section>
+
+            <section class="comp-section">
+                <div class="card-body">
+                    <div class="col-md-6 col-lg-8">
+                        <div class="newstext">
+                            <h4>Sign Up For Newsletters!</h4>
+                            <p>Get E-Mail updates about our Latest Products and <span>special offers</span>.</p>
+                        </div>
+                    </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="col-md-6 col-lg-4">
+    <div class="n-form">
+        <form id="signup-form">
+            <input type="email" id="email-input" placeholder="Your E-Mail Address..." class="form-control">
+            <button class="btn btn-primary" type="submit">Sign Up</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('signup-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting
+
+        // Clear the input field
+        document.getElementById('email-input').value = '';
+
+        // Display a SweetAlert success message
+        Swal.fire({
+            icon: 'success',
+            title: 'Thank you for signing up!',
+            text: 'You have successfully signed up with your email address.',
+        });
+
+        // You can add further code to handle the form submission here
+    });
+</script>
+
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+
+
+    
+{% endblock %}

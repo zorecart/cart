@@ -1,0 +1,107 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+{% load static %}
+{% load random_filters %}
+
+    <script>
+        // Wait for the page to finish loading
+        window.addEventListener("load", function () {
+            // Find the global-loader div
+            var globalLoader = document.getElementById("global-loader");
+
+            // Display the loader for 2 seconds, then hide it
+            setTimeout(function () {
+                globalLoader.style.display = "none";
+            }, 1000); // 2000 milliseconds (2 seconds)
+        });
+    </script>    <script>
+        // Wait for the page to finish loading
+        window.addEventListener("load", function () {
+            // Find the global-loader div
+            var globalLoader = document.getElementById("global-loader");
+
+            // Display the loader for 2 seconds, then hide it
+            setTimeout(function () {
+                globalLoader.style.display = "none";
+            }, 1000); // 2000 milliseconds (2 seconds)
+        });
+    </script>
+        <div style="padding-top: 11px;" class="page-wrapper">
+            <div class="content">
+                <div class="page-header">
+                    <div class="page-title">
+                        <h4>List</h4>
+                        <h6>Available Documents</h6>
+                    </div>
+
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-top">
+                            <div class="search-set">
+                                <div class="search-path">
+                                    <a class="btn btn-filter" id="filter_search">
+                                    <img src="{% static 'assetss/img/icons/filter.svg' %}" alt="img">
+                                    <span><img src="{% static 'assetss/img/icons/closes.svg' %}" alt="img"></span>
+                                    </a>
+                                </div>
+                                <div class="search-input">
+                                    <a class="btn btn-searchset"><img src="{% static 'assetss/img/icons/search-white.svg' %}" alt="img"></a>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+<div class="table-responsive">
+        <table class="table datanew">
+            <thead>
+                <tr>
+                    <th style="padding-left: 110px;">Logo Type</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Email Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for business in business|shuffle %}
+                <tr>
+
+                                        <td >
+                                            <a href="{% url 'giftweb:business_detail' business.id %}" class="product-img" style="font-size: 18px; width: 300px;">
+                                                <img  style="height: 120px; width: 180px;"  src="{{ business.image.url }}" border="0" alt="{% for category in product.categories.all %}
+                                                {{ category.name }}{% if not forloop.last %}, {% endif %}
+                                            {% endfor %}" class="gal-img"/>
+                                            </a>
+                                            <a href="{% url 'giftweb:business_detail' business.id %}"></a>
+                                        </td>
+                    <td>{{ business.email_address|title }}</td>
+                    <td>{{ business.category|title }}</td>
+                    <td>{{ business.type|title }} Mail</td>
+                    <td>Active</td>
+                    <td>
+                        <a class="me-3" href="{% url 'giftweb:business_detail' business.id %}">View</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="7">No business found.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+</div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

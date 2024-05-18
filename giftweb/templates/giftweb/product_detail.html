@@ -1,0 +1,228 @@
+
+{% extends 'core/base.html' %}
+
+
+
+{% block content %}
+{% load static %}
+{% include "core/script.html" %}
+
+
+
+
+    <script src="{% static 'assetss/js/script.js' %}"></script>
+
+        <div style="padding-top: 64px;" class="page-wrapper">
+            <div class="content">
+
+                <div class="page-header">
+                    <div class="page-title">
+                        <h4> Full details of  {{ product.name|title }}</h4>
+                    </div>
+                    <br>
+
+
+                    <a href="#" class="btn btn-added" id="buyNowButton">
+                        <img src="{% static 'assetss/img/icons/plus.svg' %}" alt="img" class="me-1"> Buy Now
+                    </a>
+
+                </div>
+                    <div class="page-btn">
+                        
+                    </div>
+                <div class="row">
+                    <div class="col-lg-8 col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="productdetails">
+                                    <ul class="product-bar">
+                                        <li>
+                                            <h4>Name</h4>
+                                            <h6>{{ product.name|title }} </h6>
+                                        </li>
+                                        <li>
+                                            <h4>Category</h4>
+                                            <h6>{% for category in product.categories.all %}
+                                                {{ category.name }}{% if not forloop.last %}, {% endif %}
+                                            {% endfor %}</h6>
+                                        </li>
+                                        <li>
+                                            <h4>Features</h4>
+                                            <h6>
+                                                {% for feature in features %}
+                                                    {{ feature.name }}{% if not forloop.last %}, {% endif %}
+                                                {% endfor %}
+                                            </h6>
+                                        </li>
+
+                                    
+                                        <li>
+                                            <h4>Discount </h4>
+                                            <h6>{{ product.discount }}%</h6>
+                                        </li>
+                                        <li>
+                                            <h4> Sold</h4>
+                                            <h6>{{ product.sold }} <small style="font-size:11px;" >copies</small></h6>
+                                        </li>
+                                        <li>
+                                            <h4>Status</h4>
+                                            <h6>Active</h6>
+                                        </li>
+                                        <li>
+                                            <h4>Reviews</h4>
+                                            <div class="swiper-container gallery-container">
+                                                <div class="swiper-wrapper">
+                                                    {% if reviews %}
+                                                        {% for review in reviews %}
+                                                            <div class="swiper-slide">
+                                                                <h3>{{ review.customer_name }}</h3>
+                                                                <p>{{ review.content|safe }}</p>
+                                                                <img src="{{ review.image.url }}" alt="{{ review.customer_name }}">
+                                                                <div class="stars">
+                                                                    {% for _ in "x"|rjust:review.star_rating %}
+                                                                        <span>★</span>
+                                                                    {% endfor %}
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        <p>No reviews available for this product.</p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>                                        
+                                        </li>
+
+                                        <li>
+                                            
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-description">
+                        <h4>Description</h4>
+                        <div class="description-content">
+                            {{ product.description|safe }}
+                        </div>
+                    </div>
+
+                                            </div>
+                                        </div>
+
+
+
+
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="slider-product-details">
+                                    <div class="gallery-container">
+                                        <div class="image-grid">
+                                            <div class="user-photo">
+                                                <img style="max-width: 150px; max-height: 130px;" src="{{ product.image.url }}" id="__SYS_ProfilePhoto" />
+                                            </div>
+                                            <div class="user-photo">
+                                                <img style="max-width: 150px; max-height: 130px;" src="{{ product.image2.url }}" id="__SYS_ProfilePhoto" />
+                                            </div>
+                                            <div class="user-photo">
+                                                <img style="max-width: 150px; max-height: 130px;" src="{{ product.image3.url }}" id="__SYS_ProfilePhoto" />
+                                            </div>
+                                            <div class="user-photo">
+                                                <img style="max-width: 150px; max-height: 130px;" src="{{ product.image4.url }}" id="__SYS_ProfilePhoto" />
+                                            </div>
+                                            <div class="user-photo">
+                                                <img style="max-width: 150px; max-height: 130px;" src="{{ product.image5.url }}" id="__SYS_ProfilePhoto" />
+                                            </div>
+
+                                            <!-- Repeat this user-photo block for additional images -->
+                                        </div>
+                                    </div>
+                                    <button class="scroll-button scroll-left-button">&#9664; Click to Scroll</button>
+                                    <button class="scroll-button scroll-right-button">Click to Scroll &#9654;</button>
+                                    <button class="view-fullscreen-button">View Full Screen</button> <!-- Add this button -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add a modal dialog for full-screen gallery -->
+                    <div class="modal" id="fullscreen-modal">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Full-Screen Gallery</h5>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="gallery-container">
+                                        <div class="image-grid-fullscreen">
+                                            <!-- Populate this with the same images as the original gallery -->
+                                            <div class="user-photo">
+                                                <img style="max-width: 150px; max-height: 130px;" src="{{ product.image.url }}" id="__SYS_ProfilePhoto" />
+                                            </div>
+                                            <div class="user-photo">
+                                                <img style="max-width: 150px; max-height: 130px;" src="{{ product.image2.url }}" id="__SYS_ProfilePhoto" />
+                                            </div>
+                                            <div class="user-photo">
+                                                <img style="max-width: 150px; max-height: 130px;" src="{{ product.image3.url }}" id="__SYS_ProfilePhoto" />
+                                            </div>
+                                            <div class="user-photo">
+                                                <img style="max-width: 150px; max-height: 130px;" src="{{ product.image4.url }}" id="__SYS_ProfilePhoto" />
+                                            </div>
+                                            <div class="user-photo">
+                                                <img style="max-width: 150px; max-height: 130px;" src="{{ product.image5.url }}" id="__SYS_ProfilePhoto" />
+                                            </div>
+
+                                            <!-- Repeat this user-photo block for additional images -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                <div class="page-header">
+                    <div class="page-title">
+                        <h4>Send A Message Through The Live Chat Support</h4>
+                        <h6>Or</h6>
+
+                    </div>
+                </div>
+
+
+                                    <div class="for-editor">
+                                            {% for category in product.categories.all %}
+                                                {% if not forloop.last %}, {% endif %}
+                                            
+                                        <br><a href="{% url 'giftweb:products_by_category' category_name=category.name %}">More Website Categories Like
+                                            
+                                                {{ category.name }}{% if not forloop.last %}, {% endif %}
+                                            {% endfor %}
+                                     </a>
+                                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    
+    </div>
+
+
+
+    <script src="{% static 'assetss/js/feather.min.js' %}"></script>
+
+    <script src="{% static 'assetss/js/jquery.slimscroll.min.js' %}"></script>
+
+
+    <script src="{% static 'assetss/plugins/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <script src="{% static 'assetss/plugins/select2/js/select2.min.js' %}"></script>
+
+    <script src="{% static 'assetss/js/script.js' %}"></script>
+{% endblock %}

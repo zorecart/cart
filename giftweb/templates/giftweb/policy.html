@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+{% load static %}
+{% load random_filters %}
+
+{% include "core/messages.html" %}
+
+
+
+    <body>
+
+
+        <div style="padding-top: 46px;" class="page-wrapper cardhead">
+            <div class="content">
+
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="page-title">Acceptable Use Policy (AUP):</h3>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="">Terms of Service (TOS) or Terms and Conditions:</a></li>
+                                <li class="breadcrumb-item active">Privacy Policy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title"></h5>
+        </div>
+        <div style="padding-top: 4px;" class="card-body">
+            {% for term in terms %}
+                <div class="clipboard copy-txt">
+                    <p class="otp-pass">{{ term.name }}</p>
+                    <p class="mb-4">{{ term.conditions|safe }}</p>
+                    <a class="mb-1 btn clip-btn btn-primary" href="{% url 'giftweb:contact' %}"><i data-feather="pen-tool"></i> Contact Us </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </body>
+{% endblock %}

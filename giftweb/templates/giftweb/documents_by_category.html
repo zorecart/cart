@@ -1,0 +1,106 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+{% load static %}
+
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="page-header">
+                    <div class="page-title">
+                        <h4>document List</h4>
+                    </div>
+
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-top">
+                            <div class="search-set">
+                                <div class="search-path">
+                                    <a class="btn btn-filter" id="filter_search">
+                                    <img src="{% static 'assetss/img/icons/filter.svg' %}" alt="img">
+                                    <span><img src="{% static 'assetss/img/icons/closes.svg' %}" alt="img"></span>
+                                    </a>
+                                </div>
+                                <div class="search-input">
+                                    <a class="btn btn-searchset"><img src="{% static 'assetss/img/icons/search-white.svg' %}" alt="img"></a>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="table-responsive">
+                            <table class="table  datanew">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <label class="checkboxs">
+                                            <input type="checkbox" id="select-all">
+                                            <span class="checkmarks"></span>
+                                            </label>
+                                        </th>
+                                        <th>document Name</th>
+                                        <th>SKU</th>
+                                        <th>Category </th>
+                                        <th>Brand</th>
+                                        <th>price</th>
+                                        <th>Unit</th>
+                                        <th>Qty</th>
+                                        <th>Created By</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                            {% if documents %}
+                                {% for document in documents %}                                    
+                                    <tr>
+                                        <td>
+                                            <label class="checkboxs">
+                                            <input type="checkbox">
+                                            <span class="checkmarks"></span>
+                                            </label>
+                                        </td>
+                                        <td class="documentimgname">
+                                            <a href="{% url 'giftweb:document_detail' document.id %}" class="document-img">
+<img style="max-width:40px;" src="{{ document.image.url }}" border="0" alt="{% for category in document.categories.all %}
+                                                {{ category.name }}{% if not forloop.last %}, {% endif %}
+                                            {% endfor %}" class="gal-img"/>
+                                            </a>
+                                            <a href="javascript:void(0);">{{ document.name }}</a>
+                                        </td>
+                                        <td>PT001</td>
+                                        <td>{% for category in document.categories.all %}
+                                                {{ category.name }}{% if not forloop.last %}, {% endif %}
+                                            {% endfor %}</td>
+                                        <td>N/D</td>
+                                        <td>$ {{ document.price }}</td>
+                                        <td>pc</td>
+                                        <td>100.00</td>
+                                        <td>Admin</td>
+                                        <td>
+                                            <a class="me-3" href="{% url 'giftweb:document_detail' document.id %}">
+                                            <img src="{% static 'assetss/img/icons/eye.svg' %}" alt="img"><small> --View</small>
+                                            </a>
+
+
+
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                                <p>No results found.</p>
+                            {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
