@@ -48,11 +48,16 @@
             text-align: center;
         }
 
+        .payment-history {
+            overflow-x: auto; /* Added for horizontal scrolling */
+        }
+
         .payment-history table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 32px;
             word-break: break-word;
+            min-width: 600px; /* Ensuring minimum width for better readability */
         }
 
         .payment-history th,
@@ -250,6 +255,8 @@
             background-size: cover;
             background-repeat: no-repeat;
         }
+
+        
     </style>
 </head>
 <body>
