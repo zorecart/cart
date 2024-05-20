@@ -285,6 +285,7 @@
         {% endif %}
 
         <!-- Modal -->
+
         <div class="modal fade bd-example-modal-lg main-popup" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -294,9 +295,23 @@
                                 <img id="popup-img" src="" alt="popup-img">
                             </div>
                             <div class="popup-form text-center">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true"><i class="ion-close-round"></i></span>
+                                <!-- Big X Close Button -->
+                                <button type="button" class="close big-x" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
                                 </button>
+                                <style>
+                                    .modal .close.big-x {
+                                        position: absolute;
+                                        top: 15px;
+                                        right: 15px;
+                                        font-size: 35px;
+                                        font-weight: bold;
+                                        color: #000;
+                                        cursor: pointer;
+                                        z-index: 1050;
+                                    }
+                                </style>
+
                                 <div class="popup-logo">
                                     <img src="https://res.cloudinary.com/dsbfohkyg/image/upload/v1715937899/zorev-removebg-preview_yjvxc5.png" alt="logo">
                                 </div>
