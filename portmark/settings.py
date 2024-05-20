@@ -203,6 +203,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # Set your Elastic Email SMTP server settings
 EMAIL_HOST = 'smtp.elasticemail.com'
 EMAIL_PORT = 2525  # Use Elastic Email's SMTP port
-EMAIL_HOST_USER = 'format@formatguy.store'  # Your Elastic Email username
-EMAIL_HOST_PASSWORD = '6B4FAB6724F3EC3A70CB423515A64C29E62F'  # Your Elastic Email password
+EMAIL_HOST_USER = 'info@cargologistic.online'  # Your Elastic Email username
+EMAIL_HOST_PASSWORD = 'F3B2FCEB68C60823FBEAE7989E9E0C02DB77'  # Your Elastic Email password
 EMAIL_USE_TLS = True  # Use TLS for a secure connection
