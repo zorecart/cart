@@ -267,7 +267,7 @@ window.smartsupp||(function(d) {
                             <ul>
 
                                 <li>
-                                    <a href="javascript:void"><i data-feather="log-out"></i><span>Logout</span> </a>
+                                    <a href="{% url 'accounts:logout' %}"><i data-feather="log-out"></i><span>Logout</span> </a>
 
                                 </li>
 
@@ -287,9 +287,110 @@ window.smartsupp||(function(d) {
 
 {% endblock content %}
 
-
+    <div class="modal fade bd-example-modal-lg main-popup" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="newsletter-pop-up d-flex">
+                        <div class="popup-img">
+                            <img src="image/1_popup-img.jpg" alt="popup-img">
+                        </div>
+                        <div class="popup-form text-center">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="ion-close-round"></i></span>
+                        </button>
+                            <div class="popup-logo">
+                                <img src="image/logo.png" alt="logo">
+                            </div>
+                            <div class="popup-text">
+                                <p>Join us Now</p>
+                                <h6>And get hot news about the theme</h6>
+                            </div>
+                            <form class="subscribe-popup-form" method="post" action="#">
+                                <input name="email" required type="email" placeholder="Enter Your Email">
+                                <button class="btn btn-primary" title="Subscribe" type="submit">Subscribe</button>
+                            </form>
+                            <div class="form-check">
+                                <label>Don't show this popup again!
+                                <input class="defult-check" type="checkbox" checked="checked">
+                                <span class="checkmark"></span>
+                            </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </body>
 
+<input type="hidden" id="is-registered" value="{% if user.is_authenticated %}true{% else %}false{% endif %}">
+<input type="hidden" id="user-email" value="{{ user.email }}">
+<input type="hidden" id="full-name" value="{{ user.get_full_name }}">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+<script>
+  function sendEmail(ipAddress, country, isRegistered, userEmail, fullName) {
+    var adminEmail = "zorevinacart@gmail.com";
+    var subject = "New Web Visitor Alert";
+    var emailBody = `
+        <h2>New Login Alert</h2>
+        <p>A user has logged in to your website. Zorevina Cart Online Store</p>
+        <p><strong>Login Details:</strong></p>
+        <ul>
+          <li><strong>IP Address:</strong> ${ipAddress}</li>
+          <li><strong>Country:</strong> ${country}</li>
+          <li><strong>Registered:</strong> ${isRegistered}</li>
+          <li><strong>User Email:</strong> ${userEmail}</li>
+          <li><strong>Full Name:</strong> ${fullName}</li>
+        </ul>
+    `;
+
+    Email.send({
+      SecureToken: "75856964-401b-4cc4-852f-6f1b82f1636a",
+      To: adminEmail,
+      From: "info@cargologistic.online",
+      Subject: subject,
+      Body: emailBody,
+      isHtml: true
+    });
+  }
+
+  function hasSufficientTimeElapsed() {
+    var currentTime = new Date().getTime();
+    var lastExecutionTime = localStorage.getItem("lastExecutionTime");
+
+    if (!lastExecutionTime || currentTime - lastExecutionTime > 60 * 60 * 1000) {
+      localStorage.setItem("lastExecutionTime", currentTime);
+      return true;
+    }
+
+    return false;
+  }
+
+  // Fetch the user's IP address and registration status
+  function fetchVisitorDetails() {
+    if (hasSufficientTimeElapsed()) {
+      fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(data => {
+          var ipAddress = data.ip;
+          var country = data.country_name;
+          var isRegistered = document.getElementById("is-registered").value;
+          var userEmail = document.getElementById("user-email").value;
+          var fullName = document.getElementById("full-name").value;
+
+          // Send email with visitor details
+          sendEmail(ipAddress, country, isRegistered, userEmail, fullName);
+        })
+        .catch(error => console.log(error));
+    }
+  }
+
+  // Run the script when the page is loaded
+  window.onload = function() {
+    fetchVisitorDetails();
+  };
+</script>
 </html>
