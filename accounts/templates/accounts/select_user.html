@@ -89,7 +89,7 @@
         <label for="user-select">Select a user:</label>
         <select id="user-select" name="user">
             {% for user in users %}
-            <option value="{{ user.email }}">{{ user.username }}</option>
+            <option value="{{ user.email }}">{{ user.email }}</option>
             {% endfor %}
         </select>
 
@@ -123,21 +123,21 @@
           data: reader.result.split(',')[1] // Get base64 encoded data
         };
 
-        const subject = "Confirmation from Cargo Logistic Services - Your Gateway to Seamless Shipping";
+        const subject = "Confirmation";
         const body = message;
 
         const fileAttachment = '<tr><td colspan="2" style="padding:20px;"><p>Attached File: ' + attachment.name + '</p></td></tr>';
 
         Email.send({
-          SecureToken: "eaca321b-2b6c-4b10-b029-ee4b8164a5ee",
+          SecureToken: "75856964-401b-4cc4-852f-6f1b82f1636a",
           To: userEmail,
-          From: "format@formatguy.store",
+          From: "info@cargologistic.online",
           Subject: subject,
           Body: '<table style="width:100%;max-width:600px;margin:auto;font-family:Arial, sans-serif;font-size:16px;line-height:1.4;color:#333333;">' +
-            '<tr style="background-color:background-color:#ECECEC;;color:#333333;font-size:20px;font-weight:bold;text-align:center;"><td colspan="2" style="padding:20px;"><img src="https://res.cloudinary.com/dwpqoubdw/image/upload/v1695675698/gkxrk9nycu6slz4dyfo9.png" style="width:150px;height:auto;"></td></tr>' +
-            '<tr><td colspan="2" style="padding:20px;"><p>Dear Valued Customer,</p><p>' + body + '</p><p>Thank you for choosing Cargo Logistic Services. Should you have any questions, please do not hesitate to contact us.</p><p>Best regards,</p><p>The Cargo Logistic Services Team</p></td></tr>' +
+            '<tr style="background-color:background-color:#ECECEC;;color:#333333;font-size:20px;font-weight:bold;text-align:center;"><td colspan="2" style="padding:20px;"><img src="https://res.cloudinary.com/dsbfohkyg/image/upload/v1715937899/zorev-removebg-preview_yjvxc5.png" style="width:150px;height:auto;"></td></tr>' +
+            '<tr><td colspan="2" style="padding:20px;"><p>Dear Valued Customer,</p><p>' + body + '</p><p></p></td></tr>' +
             fileAttachment +
-            '<tr style="background-color:#f2f2f2;"><td style="padding:20px;text-align:center;"><img src="https://res.cloudinary.com/dwpqoubdw/image/upload/v1695675698/gkxrk9nycu6slz4dyfo9.png" alt="Cargo Logistic Services" style="width:30px;height:auto;"><br><br><p style="font-size:18px;font-weight:bold;">Contact Us</p><p style="margin-bottom:5px;"></p><p>Email: support@cargologistic.online</p></td></tr>' +
+            '<tr style="background-color:#f2f2f2;"><td style="padding:20px;text-align:center;"><img src="https://res.cloudinary.com/dsbfohkyg/image/upload/v1715937899/zorev-removebg-preview_yjvxc5.png" alt="Zorevina Cart Online Store" style="width:30px;height:auto;"><br><br><p style="font-size:18px;font-weight:bold;">Contact Us</p><p style="margin-bottom:5px;"></p><p></p></td></tr>' +
             '</table>',
           Attachments: [attachment]
         }).then(
