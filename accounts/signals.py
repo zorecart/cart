@@ -32,7 +32,7 @@ def post_save_create_profile(sender, instance, created, *args, **kwargs):
             subject = 'Welcome to Our store'
             message = render_to_string('welcome_email.html', {'user': instance})
             plain_message = strip_tags(message)
-            from_email = 'format@formatguy.store'  # Set your email address
+            from_email = 'info@cargologistic.online'  # Set your email address
             to_email = instance.email
 
             send_mail(subject, plain_message, from_email, [to_email], html_message=message)
