@@ -181,8 +181,7 @@ def login_view(request):
                     ip_address=ip_address
                 )
 
-                message = f"Login Successful. Welcome back, {user.username}. Your authentication was successful."
-                messages.success(request, message)
+
                 return redirect('giftweb:home')
             else:
                 messages.error(request, "Invalid account number or password")
