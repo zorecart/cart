@@ -43,13 +43,9 @@
                                             </label>
                                         </th>
                                         <th>Product Name</th>
-                                        <th>SKU</th>
                                         <th>Category </th>
-                                        <th>Brand</th>
                                         <th>price</th>
                                         <th>Unit</th>
-                                        <th>Qty</th>
-                                        <th>Created By</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -71,15 +67,11 @@
                                             </a>
                                             <a href="javascript:void(0);">{{ product.name }}</a>
                                         </td>
-                                        <td>PT001</td>
                                         <td>{% for category in product.categories.all %}
                                                 {{ category.name }}{% if not forloop.last %}, {% endif %}
                                             {% endfor %}</td>
-                                        <td>N/D</td>
                                         <td>$ {{ product.price }}</td>
                                         <td>pc</td>
-                                        <td>100.00</td>
-                                        <td>Admin</td>
                                         <td>
                                             <a class="me-3" href="{% url 'giftweb:product_detail' product.id %}">
                                             <img src="{% static 'assetss/img/icons/eye.svg' %}" alt="img"><small> --View</small>
