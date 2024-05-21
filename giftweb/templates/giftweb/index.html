@@ -443,7 +443,7 @@
             flashMessage.classList.add('show');
             setTimeout(function () {
                 flashMessage.classList.remove('show');
-            }, 720000);
+            }, 3000);
         }
     });
 </script>
@@ -504,7 +504,7 @@
             if (lastClosedTime) {
                 const currentTime = new Date().getTime();
                 const timeSinceLastClose = currentTime - lastClosedTime;
-                if (timeSinceLastClose > 20000) { // 2 hours
+                if (timeSinceLastClose > 720000) { //  hours
                     showModal();
                 }
             } else {
