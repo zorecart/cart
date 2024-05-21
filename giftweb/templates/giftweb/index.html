@@ -354,7 +354,7 @@
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a href="{% url 'giftweb:product_detail' product.id %}">{{ product.name }}</a>
+                                    <a href="{% url 'giftweb:product_detail' product.id %}">{{ product.name|slice:":20" }}</a>
                                 </h5>
                                 <div class="star-rating"></div>
                                 <p class="card-text">
