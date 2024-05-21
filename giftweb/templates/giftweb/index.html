@@ -357,12 +357,19 @@
                                     <a href="{% url 'giftweb:product_detail' product.id %}">{{ product.name }}</a>
                                 </h5>
                                 <div class="star-rating"></div>
-                                <p class="card-text">Categories:
-                                    {% for category in product.categories.all %}
-                                        {{ category.name }}{% if not forloop.last %}, {% endif %}
-                                    {% endfor %}
+                                <p class="card-text">
                                 </p>
-                                <p class="card-text">Price : <strong>${{ product.sold }}</strong></p>
+
+                                        {% if product.discount %}
+                                <p style="padding-left: 0px;">
+                                    <span>US ${{ product.price }}</span><br>
+                                    <small style="text-decoration: line-through;">-$ {{ product|discount_amount }} |</small> {{ product.discount|discount_percentage }}% OFF
+                                </p>
+
+
+                                        {% else %}
+                                            <p>Price: US ${{ product.price }}</p>
+                                        {% endif %}
                             </div>
                         </div>
                     </div>
