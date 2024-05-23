@@ -29,9 +29,7 @@ class BusinessEmailAdmin(admin.ModelAdmin):
 
 admin.site.register(BusinessEmail, BusinessEmailAdmin)
 """
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+
 
 @admin.register(Feature)
 class FeatureAdmin(admin.ModelAdmin):
@@ -42,11 +40,20 @@ class ReviewAdmin(admin.ModelAdmin):
 
 admin.site.register(Review, ReviewAdmin)
 
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'status')
-    list_filter = ('status',)
+    list_display = ('name', 'price', 'status', 'get_categories')
+    list_filter = ('status', 'categories',)
     search_fields = ('name',)
+
+    def get_categories(self, obj):
+        return ", ".join([category.name for category in obj.categories.all()])
+    get_categories.short_description = 'Categories'
+
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
