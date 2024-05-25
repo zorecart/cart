@@ -386,20 +386,20 @@
                                             <table 0="[object Object]" 1="[object Object]" 2="[object Object]" border="0" style="cellspacing:0;color:#000;font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;">
                                                 <tr style="border-bottom:1px solid #ecedee;text-align:left;">
                                                     <th style="padding: 0 15px 10px 0;">Item</th>
-                                                    <th style="padding: 0 15px;">Qt.</th>
-                                                    <th style="padding: 0 0 0 15px;" align="right">Price</th>
+                                                    <th style="">Qt.</th>
+                                                    <th style="" align="right">Price</th>
                                                 </tr>
                                                 <tr>
-                                                    <td style="padding: 5px 15px 5px 0;">{{ payment.product.name }}</td>
-                                                    <td style="padding: 0 15px;">{{ payment.quantity }}</td>
-                                                    <td style="padding: 0 0 0 15px;" align="right">${{ payment.product.price }} {{ payment.payment_method }} </td>
+                                                    <td style="padding: 5px 15px 5px 0; font-size:10px;">{{ payment.product.name }}</td>
+                                                    <td style="padding: 0 15px; font-size:10px;">{{ payment.quantity }}</td>
+                                                    <td style="" align="right">${{ payment.product.price }} {{ payment.payment_method }} </td>
                                                 </tr>
 
 
                                                 <tr style="border-bottom:2px solid #ecedee;text-align:left;padding:15px 0;">
-                                                    <td style="padding: 5px 15px 5px 0; font-weight:bold">TOTAL</td>
+                                                    <td style=" font-weight:bold">TOTAL</td>
                                                     <td style="padding: 0 15px;"></td>
-                                        <td style="padding: 0 0 0 15px; font-weight:bold" align="right"> ${{ payment.amount }}</td>
+                                        <td  font-size:10px; font-weight:bold" align="right"> ${{ payment.amount }}</td>
                                                 </tr>
                                             </table>
 
