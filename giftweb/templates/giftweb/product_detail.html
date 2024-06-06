@@ -48,6 +48,18 @@
                                             {% endfor %}</h6>
                                         </li>
                                         <li>
+                                            <h4>Price</h4>
+                                            <h6>
+                                               US $ {{ product.price }}
+                                            </h6>
+                                        </li>
+                                        <li>
+                                            <h4>Condition</h4>
+                                            <h6>
+                                               Brand New
+                                            </h6>
+                                        </li>
+                                        <li>
                                             <h4>Features</h4>
                                             <h6>
                                                 {% for feature in features %}
@@ -198,7 +210,7 @@
                                             {% for category in product.categories.all %}
                                                 {% if not forloop.last %}, {% endif %}
                                             
-                                        <br><a href="{% url 'giftweb:products_by_category' category_name=category.name %}">More Website Categories Like
+                                        <br><a href="{% url 'giftweb:products_by_category' category_name=category.name %}">More Item Categories Like
                                             
                                                 {{ category.name }}{% if not forloop.last %}, {% endif %}
                                             {% endfor %}
