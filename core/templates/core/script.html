@@ -1,5 +1,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <style>
     /* Custom styles for SweetAlert */
@@ -29,6 +30,7 @@
 
     .payment-option {
         display: flex;
+        flex-direction: column;
         align-items: center;
         padding: 15px;
         border-radius: 8px;
@@ -41,15 +43,102 @@
         background-color: #e0e0e0;
     }
 
-    .payment-option img {
-        width: 30px;
-        margin-right: 15px;
+    .payment-option span {
+        text-align: center;
+        margin-top: 10px;
     }
+
+    .payment-option .payment-images {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .payment-option .payment-images img {
+        width: 40px;
+        height: 40px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+    }
+
+    .payment-option .payment-images img:hover {
+        transform: scale(1.1);
+    }
+
+    @media (max-width: 600px) {
+        .payment-option .payment-images img {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    /* Enhanced styling for cash transfer */
+    .cash-transfer-content {
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        padding: 20px;
+        background: linear-gradient(135deg, #ff5722, #ff8a50);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .cash-transfer-icon {
+        font-size: 50px;
+        color: #fff;
+        margin-bottom: 10px;
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+    }
+
+    .cash-transfer-note {
+        font-size: 14px;
+        color: #fff;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .cash-transfer-background {
+        background: linear-gradient(135deg, #ff5722, #ff8a50);
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        color: #fff;
+    }
+
+    .cash-transfer-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #fff;
+        color: #ff5722;
+        border-radius: 5px;
+        margin-top: 15px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .cash-transfer-btn:hover {
+        background-color: #ff5722;
+        color: #fff;
+    }
+
 </style>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const buyNowButton = document.querySelector('#buyNowButton', 'buyNowButton2');
+        const buyNowButton = document.querySelector('#buyNowButton');
 
         if (buyNowButton) {
             buyNowButton.addEventListener('click', function(e) {
@@ -66,15 +155,27 @@
             html:
                 `<div class="payment-options">
                     <div class="payment-option" onclick="buyWithGiftCard()">
-                        <img src="https://cdn.redmondpie.com/wp-content/uploads/2011/07/Apple-Logo.png" alt="Gift Card">
+                        <div class="payment-images">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/488px-Apple_logo_black.svg.png?20220821121934" alt="Apple Gift Card">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Amazon_icon.png?20171005153412" alt="Amazon Gift Card">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/512px-Steam_icon_logo.svg.png?20220611141426" alt="STEAM Gift Card">
+                        </div>
                         <span>Buy With Gift Card</span>
                     </div>
                     <div class="payment-option" onclick="buyWithCrypto()">
-                        <img src="https://freepngimg.com/thumb/bitcoin/59526-cryptocurrency-badge-bitcoin-gold-png-file-hd.png" alt="Crypto">
+                        <div class="payment-images">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/64px-Bitcoin.svg.png" alt="Bitcoin">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/256px-Ethereum_logo_2014.svg.png?20161015085252" alt="Ethereum">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Tether_USDT.png/600px-Tether_USDT.png?20211129171143" alt="Tether">
+                        </div>
                         <span>Buy with Crypto</span>
                     </div>
                     <div class="payment-option" onclick="buyWithCash()">
-                        <img src="https://w7.pngwing.com/pngs/178/28/png-transparent-computer-icons-money-bag-bank-cash-angle-hand-investment-thumbnail.png" alt="Cash">
+                        <div class="payment-images">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png" alt="PayPal">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Zelle_logo.svg/800px-Zelle_logo.svg.png?20200103202638" alt="Zelle Pay">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/512px-Stripe_Logo%2C_revised_2016.svg.png" alt="Stripe">
+                        </div>
                         <span>Buy with Cash Transfer</span>
                     </div>
                  </div>`,
@@ -94,7 +195,7 @@
             timer: 1500,
             showConfirmButton: false
         }).then(() => {
-            window.location.href = '{% url 'giftweb:make_payment' model_name='product' product_id=product.id %}'; // Redirect to the gift card page
+            window.location.href = '{% url "giftweb:make_payment" model_name="product" product_id=product.id %}'; // Redirect to the gift card page
         });
     }
 
@@ -105,21 +206,33 @@
             timer: 1500,
             showConfirmButton: false
         }).then(() => {
-            window.location.href = '{% url 'giftweb:make_crypto_payment' model_name='product' product_id=product.id %}'; // Redirect to the crypto payment page
+            window.location.href = '{% url "giftweb:make_crypto_payment" model_name="product" product_id=product.id %}'; // Redirect to the crypto payment page
         });
     }
 
     function buyWithCash() {
         Swal.fire({
-            icon: 'success',
-            title: 'Buy with Cash Transfer selected',
-            text: 'Contact the live chat support for a secured cash transfer.',
-            confirmButtonText: 'OK'
+            icon: 'info',
+            title: 'Buy with Cash Transfer',
+            html: `<div class="cash-transfer-content">
+                      <i class="fas fa-hand-holding-usd cash-transfer-icon"></i>
+                      Contact the live chat support for a secured cash transfer.
+                      <div class="cash-transfer-note">Ensure to have your transaction details ready.</div>
+                   </div>`,
+            confirmButtonText: 'OK',
+            showClass: {
+                popup: 'animate__animated animate__zoomIn animate__faster'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__zoomOut animate__faster'
+            }
         }).then(() => {
-            // You can add additional logic here if needed
+            // Additional logic can be added here if needed
         });
     }
 </script>
+
+
 
 
 
