@@ -200,9 +200,9 @@ CKEDITOR_CONFIGS = {
 # Use the SMTP backend
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-# Set your Elastic Email SMTP server settings
-EMAIL_HOST = 'smtp.elasticemail.com'
-EMAIL_PORT = 2525  # Use Elastic Email's SMTP port
-EMAIL_HOST_USER = 'info@cargologistic.online'  # Your Elastic Email username
-EMAIL_HOST_PASSWORD = 'F3B2FCEB68C60823FBEAE7989E9E0C02DB77'  # Your Elastic Email password
-EMAIL_USE_TLS = True  # Use TLS for a secure connection
+EMAIL_HOST = 'smtp.mailersend.net'  # MailerSend SMTP server
+EMAIL_PORT = 587                    # Port for TLS
+EMAIL_USE_TLS = True                # Use TLS for secure connection
+EMAIL_HOST_USER = 'MS_hEOIPz@zorevinacart.store'  # Your MailerSend SMTP username
+EMAIL_HOST_PASSWORD = 'iyaHfBTggO1xOkfg'         # Your MailerSend SMTP password
+DEFAULT_FROM_EMAIL = 'MS_hEOIPz@zorevinacart.store'  # The default "From" email address
