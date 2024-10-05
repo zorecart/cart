@@ -1,0 +1,531 @@
+
+
+{% extends 'core/base.html' %}
+
+{% block content %}
+{% load static %}
+{% load random_filters %}
+
+{% include "core/messages.html" %}
+
+<style>
+    /* Custom styles for product cards */
+    .product-card {
+        text-align: center;
+        padding: 15px;
+        position: relative;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    .product-card img {
+        max-width: 100%; /* Ensure images don't exceed container width */
+        height: auto; /* Maintain aspect ratio */
+        display: block; /* Ensure proper alignment */
+        margin: 0 auto; /* Center align images */
+        max-height: 200px; /* Fixed max height to prevent oversizing */
+        transition: transform 0.5s ease-in-out; /* Smooth image transition */
+    }
+
+    .product-card img.secondary-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60%;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out; /* Smooth opacity transition */
+    }
+
+    .product-card:hover img {
+        transform: scale(1.05); /* Slight zoom effect */
+    }
+
+    .product-card:hover img.secondary-image {
+        opacity: 1;
+    }
+    .card-text{
+        font-size: 15px;
+        font-weight: bold;
+    }
+    /* Star rating styles */
+    .star-rating {
+        display: inline-block;
+        font-size: 0;
+        line-height: 1;
+        position: relative;
+        white-space: nowrap;
+        margin: 0 auto 10px;
+    }
+
+    .star-rating::before,
+    .star-rating::after {
+        content: '★★★★★';
+        font-size: 20px;
+        line-height: 1;
+    }
+
+    .star-rating::before {
+        color: #ccc;
+    }
+
+    .star-rating::after {
+        color: #ff9800;
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        width: 80%; /* Adjust width to show 4 out of 5 stars */
+    }
+    
+    /* Flash message styles */
+    .flash-message {
+        display: none;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #ff9800;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    }
+
+    .flash-message.show {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @media (max-width: 767px) {
+        .product-card {
+            margin-bottom: 15px;
+        }
+
+        .product-card img {
+            max-height: 150px; /* Smaller max height for mobile */
+        }
+
+        .flash-message {
+            top: 10px;
+            right: 10px;
+            padding: 10px 15px;
+        }
+    }
+
+    /* Modal styles */
+    .modal.fade {
+        display: none;
+    }
+
+    .modal.show {
+        display: block;
+    }
+
+    .main-popup .modal-content {
+        display: flex;
+        padding: 0;
+        border: none;
+        border-radius: 0;
+        max-width: 800px;
+        margin: auto;
+    }
+
+    .main-popup .modal-body {
+        display: flex;
+        padding: 0;
+    }
+
+    .main-popup .popup-img {
+        flex: 1;
+        position: relative;
+    }
+
+    .main-popup .popup-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .main-popup .popup-form {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .main-popup .popup-form .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .main-popup .popup-form .popup-logo img {
+        max-width: 150px;
+        margin-bottom: 20px;
+    }
+
+    .main-popup .popup-form .popup-text p,
+    .main-popup .popup-form .popup-text h6 {
+        margin: 10px 0;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .main-popup .popup-form .subscribe-popup-form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .main-popup .popup-form .subscribe-popup-form input {
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .main-popup .popup-form .subscribe-popup-form button {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .main-popup .popup-form .form-check {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .main-popup .popup-form .form-check label {
+        margin-left: 5px;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    /* Keyframes for fadeIn animation */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Flying balloons animation */
+    .balloons {
+        position: absolute;
+        bottom: -100px;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .balloon {
+        position: absolute;
+        bottom: -100px;
+        animation: fly 10s linear infinite;
+        will-change: transform;
+    }
+
+    .balloon:nth-child(1) { left: 10%; animation-duration: 8s; }
+    .balloon:nth-child(2) { left: 30%; animation-duration: 12s; }
+    .balloon:nth-child(3) { left: 50%; animation-duration: 10s; }
+    .balloon:nth-child(4) { left: 70%; animation-duration: 14s; }
+    .balloon:nth-child(5) { left: 90%; animation-duration: 16s; }
+
+    @keyframes fly {
+        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+</style>
+
+<div class="page-wrapper">
+    <div class="content">
+        <!-- Search Form 
+        <div class="page-header">
+            <div class="page-title">
+                <h4>List</h4>
+            </div>
+        </div>-->
+
+        <!-- Search Form -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <form method="GET" action="{% url 'giftweb:home' %}">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search by product name, feature, or category" value="{{ search_query }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Flash Message -->
+        {% if search_query %}
+        <div id="flash-message" class="flash-message">
+            {{ product_count }} products found.
+        </div>
+        {% endif %}
+
+        <!-- Modal -->
+
+        <div class="modal fade bd-example-modal-lg main-popup" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body p-0">
+                        <div class="newsletter-pop-up d-flex">
+                            <div class="popup-img">
+                                <img id="popup-img" src="" alt="popup-img">
+                            </div>
+                            <div class="popup-form text-center">
+                                <!-- Big X Close Button -->
+                                <button type="button" class="close big-x" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <style>
+                                    .modal .close.big-x {
+                                        position: absolute;
+                                        top: 15px;
+                                        right: 15px;
+                                        font-size: 35px;
+                                        font-weight: bold;
+                                        color: #000;
+                                        cursor: pointer;
+                                        z-index: 1050;
+                                    }
+                                </style>
+
+                                <div class="popup-logo">
+                                    <img src="https://res.cloudinary.com/dsbfohkyg/image/upload/v1715937899/zorev-removebg-preview_yjvxc5.png" alt="logo">
+                                </div>
+                                <div class="popup-text">
+                                    <p id="popup-text"></p>
+                                    <h6 id="popup-subtext"></h6>
+                                </div>
+                                <form class="subscribe-popup-form" >
+                            <a href="javascript:void" class="btn btn-primary" id="popup-button-link" title="Learn More">we have more than you think. just mention it and its yours</a>
+                                </form>
+                                <div class="form-check">
+                                    <label>Click On The Screen To Dismiss
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="balloons">
+                            <div class="balloon"><img src="https://res.cloudinary.com/dsbfohkyg/image/upload/v1716229265/ba4-removebg-preview_x1ndfz.png" alt="Balloon"></div>
+                            <div class="balloon"><img src="https://res.cloudinary.com/dsbfohkyg/image/upload/v1716229261/ba5-removebg-preview_ixe8ld.png" alt="Balloon"></div>
+                            <div class="balloon"><img src="https://res.cloudinary.com/dsbfohkyg/image/upload/v1716229272/ba3-removebg-preview_p7bghe.png" alt="Balloon"></div>
+                            <div class="balloon"><img src="https://res.cloudinary.com/dsbfohkyg/image/upload/v1716229280/ba2-removebg-preview_chu3av.png" alt="Balloon"></div>
+                            <div class="balloon"><img src="https://res.cloudinary.com/dsbfohkyg/image/upload/v1716229287/ba11-removebg-preview_gpyvpy.png" alt="Balloon"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {% if products %}
+                {% for product in products|shuffle %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-4">
+                        <div style="max-height:400px;" class="card product-card">
+                            <a href="{% url 'giftweb:product_detail' product.id %}">
+                                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                                {% if product.image2 %}
+                                    <img src="{{ product.image2.url }}" class="secondary-image" alt="{{ product.name }} secondary image">
+                                {% endif %}
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{% url 'giftweb:product_detail' product.id %}">{{ product.name|slice:":20" }}...</a>
+                                </h5>
+                                <div class="star-rating"></div>
+                                <p class="card-text">
+                                </p>
+
+                                        {% if product.discount %}
+                                <p style="padding-left: 0px;">
+                                    <span>US ${{ product.price }}</span><br>
+                                    <small style="text-decoration: line-through;">-$ {{ product|discount_amount }} |</small> {{ product.discount|discount_percentage }}% OFF
+                                </p>
+
+
+                                        {% else %}
+                                            <p>Price: US ${{ product.price }}</p>
+                                        {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col">
+                    <p>No results found.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Pagination Controls -->
+<div class="col-xl-6">
+    <div class="card">
+        <div class="card-body">
+            <nav aria-label="Page navigation">
+                <ul class="pagination mb-0">
+                    {% if products.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ products.previous_page_number }}">
+                                <i class="fas fa-arrow-left-long me-2"></i>Previous
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0);">
+                                <i class="fas fa-arrow-left-long me-2"></i>Previous
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in products.paginator.page_range %}
+                        {% if products.number == num %}
+                            <li class="page-item active">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                        {% elif num == 1 or num == products.paginator.num_pages or num == products.number|add:'-1' or num == products.number|add:'1' %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                        {% elif num < products.number and products.number < num|add:'5' %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                        {% elif num > products.number and num < products.number|add:'5' %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                        {% elif num == products.number|add:'-2' or num == products.number|add:'2' %}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="javascript:void(0);">...</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if products.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ products.next_page_number }}">
+                                Next<i class="fas fa-arrow-right-long ms-2"></i>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0);">
+                                Next<i class="fas fa-arrow-right-long ms-2"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        <div style="color: white; background-color: " id="google_translate_element2"></div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+{% if search_query %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const flashMessage = document.getElementById('flash-message');
+        if (flashMessage) {
+            flashMessage.classList.add('show');
+            setTimeout(function () {
+                flashMessage.classList.remove('show');
+            }, 3000);
+        }
+    });
+</script>
+{% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('exampleModal');
+        const modalClose = document.querySelector('.close');
+        const dontShowAgainCheckbox = document.querySelector('.defult-check');
+        const popupText = document.getElementById('popup-text');
+        const popupSubtext = document.getElementById('popup-subtext');
+        const popupImg = document.getElementById('popup-img');
+
+        const messages = [
+            { text: 'Join us Now', subtext: 'Get 50% Discount', img: 'https://cdn.mos.cms.futurecdn.net/b54227c848bef6a052cdc7b18e2633fb-768-80.jpg.webp' },
+            { text: 'Buy Today', subtext: 'Get Free Delivery', img: 'https://assets2.razerzone.com/images/pnx.assets/a2c45a48832815a0cf64acd462fe9bf7/razer-blade-15-ch9-ogimage_1200x630.png' },
+            { text: 'Stay Secured', subtext: 'Your Shipment Arrives Faster', img: 'https://i.ytimg.com/vi/tv9ifmgL9Cg/maxresdefault.jpg' },
+            { text: 'Don\'t Miss Out', subtext: 'We have the best deals', img: 'https://www.notebookcheck.net/fileadmin/_processed_/8/a/csm_AKA9260_8e9750394d.jpg' },
+            { text: 'Best Deals', subtext: 'Safe And Secured Delivery', img: 'https://www.businessinsider.in/thumb.cms?msid=99055543&width=1200&height=900' }
+        ];
+
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+
+        // Function to show the modal
+        function showModal() {
+            popupText.textContent = randomMessage.text;
+            popupSubtext.textContent = randomMessage.subtext;
+            popupImg.src = randomMessage.img;
+            $(modal).modal('show');
+            localStorage.setItem('modalClosedTime', new Date().getTime());
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            $(modal).modal('hide');
+            localStorage.setItem('modalClosedTime', new Date().getTime());
+        }
+
+        // Handle close button click
+        modalClose.addEventListener('click', function () {
+            closeModal();
+        });
+
+        // Check the checkbox status
+        dontShowAgainCheckbox.addEventListener('change', function () {
+            if (this.checked) {
+                localStorage.setItem('dontShowAgain', 'true');
+            } else {
+                localStorage.removeItem('dontShowAgain');
+            }
+        });
+
+        // Check if the modal should be shown
+        const lastClosedTime = localStorage.getItem('modalClosedTime');
+        const dontShowAgain = localStorage.getItem('dontShowAgain');
+        if (!dontShowAgain) {
+            if (lastClosedTime) {
+                const currentTime = new Date().getTime();
+                const timeSinceLastClose = currentTime - lastClosedTime;
+                if (timeSinceLastClose > 720000) { //  hours
+                    showModal();
+                }
+            } else {
+                showModal();
+            }
+        }
+    });
+</script>
+
+{% endblock %}

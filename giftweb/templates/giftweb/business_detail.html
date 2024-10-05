@@ -1,0 +1,264 @@
+
+{% extends 'core/base.html' %}
+
+
+
+{% block content %}
+{% load static %}
+{% include "core/messages.html" %}
+
+
+
+<div style="padding-top: 11px;" class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Details</h4>
+                <h6>Full details of {{ business.title|title }}</h6>
+            </div>
+            <a href="{% url 'giftweb:contact' %}" class="btn btn-added"><img src="{% static 'assetss/img/icons/plus.svg' %}" alt="img" class="me-1" />Contact Us</a>
+        </div>
+        <div class="page-btn"></div>
+        <div class="row">
+            <div class="col-lg-8 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="productdetails">
+                            <ul class="product-bar">
+                                <li>
+                                    <h4>Name</h4>
+                                    <h6>{{ business.email_address|title }}</h6>
+                                </li>
+                                <li>
+                                    <h4>Type</h4>
+                                    <h6>{{ business.type|title }} Mail</h6>
+                                </li>
+                                <li>
+                                    <h4>Category</h4>
+                                    <h6>{{ business.category|title }}</h6>
+                                </li>
+                                <li>
+                                    <h4>Status</h4>
+                                    <h6>Active</h6>
+                                </li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-description">
+                        <h4>Description</h4>
+                        <div class="description-content">
+                            {{ business.description|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="slider-product-details">
+                            <div class="gallery-container">
+                                <div class="image-grid">
+                                    <div class="user-photo">
+                                        <img style="max-width: 150px; max-height: 130px;" src="{{ business.image.url }}" id="__SYS_ProfilePhoto" />
+                                    </div>
+                                    <div class="user-photo">
+                                        <img style="max-width: 150px; max-height: 130px;" src="{{ business.image.url }}" id="__SYS_ProfilePhoto" />
+                                    </div>
+                                    <div class="user-photo">
+                                        <img style="max-width: 150px; max-height: 130px;" src="{{ business.image3.url }}" id="__SYS_ProfilePhoto" />
+                                    </div>
+                                    <div class="user-photo">
+                                        <img style="max-width: 150px; max-height: 130px;" src="{{ business.image4.url }}" id="__SYS_ProfilePhoto" />
+                                    </div>
+                                    <div class="user-photo">
+                                        <img style="max-width: 150px; max-height: 130px;" src="{{ business.image5.url }}" id="__SYS_ProfilePhoto" />
+                                    </div>
+
+                                    <!-- Repeat this user-photo block for additional images -->
+                                </div>
+                            </div>
+                            <button class="scroll-button scroll-left-button">&#9664; Click to Scroll</button>
+                            <button class="scroll-button scroll-right-button">Click to Scroll &#9654;</button>
+                            <button class="view-fullscreen-button">View Full Screen</button>
+                            <!-- Add this button -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add a modal dialog for full-screen gallery -->
+            <div class="modal" id="fullscreen-modal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Full-Screen Gallery</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="gallery-container">
+                                <div class="image-grid-fullscreen">
+                                    <!-- Populate this with the same images as the original gallery -->
+                                    <div class="user-photo">
+                                        <img style="max-width: 150px; max-height: 130px;" src="{{ business.image.url }}" id="__SYS_ProfilePhoto" />
+                                    </div>
+                                    <div class="user-photo">
+                                        <img style="max-width: 150px; max-height: 130px;" src="{{ business.image2.url }}" id="__SYS_ProfilePhoto" />
+                                    </div>
+                                    <div class="user-photo">
+                                        <img style="max-width: 150px; max-height: 130px;" src="{{ business.image3.url }}" id="__SYS_ProfilePhoto" />
+                                    </div>
+                                    <div class="user-photo">
+                                        <img style="max-width: 150px; max-height: 130px;" src="{{ business.image4.url }}" id="__SYS_ProfilePhoto" />
+                                    </div>
+                                    <div class="user-photo">
+                                        <img style="max-width: 150px; max-height: 130px;" src="{{ business.image5.url }}" id="__SYS_ProfilePhoto" />
+                                    </div>
+
+                                    <!-- Repeat this user-photo block for additional images -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="page-header">
+                <div class="page-title">
+                    <h4>Send A Message Through The Live Chat Support</h4>
+                    <h6>Or</h6>
+                </div>
+                <a href="{% url 'giftweb:contact' %}" class="btn btn-added"><img src="{% static 'assetss/img/icons/plus.svg' %}" alt="img" class="me-1" />Contact Us Now</a>
+            </div>
+            <style>
+                /* Add styles for the full-screen modal */
+                .modal-xl {
+                    /* Increase the modal size here */
+                    max-width: 95%; /* Adjust the maximum width as needed */
+                }
+
+                .image-grid-fullscreen {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    overflow-x: auto;
+                    scroll-behavior: smooth;
+                }
+            </style>
+            <style>
+                .gallery-container {
+                    position: relative;
+                    width: 100%;
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+
+                .image-grid {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    overflow-x: auto;
+                    scroll-behavior: smooth; /* Add smooth scrolling behavior */
+                }
+
+                .user-photo {
+                    margin-right: 20px;
+                }
+
+                .scroll-button {
+                    background-color: rgba(255, 255, 255, 0.8);
+                    padding: 5px;
+                    cursor: pointer;
+                    z-index: 1;
+                }
+
+                .scroll-left-button {
+                    margin-right: 10px; /* Add some spacing between buttons */
+                }
+
+                .scroll-right-button {
+                    margin-left: 10px; /* Add some spacing between buttons */
+                }
+            </style>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const scrollLeftButton = document.querySelector('.scroll-left-button');
+                    const scrollRightButton = document.querySelector('.scroll-right-button');
+                    const imageGrid = document.querySelector('.image-grid');
+                    const viewFullscreenButton = document.querySelector('.view-fullscreen-button');
+                    const fullscreenModal = document.getElementById('fullscreen-modal');
+
+                    scrollLeftButton.addEventListener('click', () => {
+                        imageGrid.scrollBy({
+                            left: -150,
+                            behavior: 'smooth',
+                        });
+                    });
+
+                    scrollRightButton.addEventListener('click', () => {
+                        imageGrid.scrollBy({
+                            left: 150,
+                            behavior: 'smooth',
+                        });
+                    });
+
+                    viewFullscreenButton.addEventListener('click', () => {
+                        // Show the full-screen modal
+                        fullscreenModal.style.display = 'block';
+                    });
+
+                    // Close the full-screen modal when the close button or the modal footer button is clicked
+                    const closeModalButton = document.querySelector('.modal .close');
+                    closeModalButton.addEventListener('click', () => {
+                        fullscreenModal.style.display = 'none';
+                    });
+
+                    const modalFooterCloseButton = document.querySelector('.modal-footer button');
+                    modalFooterCloseButton.addEventListener('click', () => {
+                        fullscreenModal.style.display = 'none';
+                    });
+                });
+            </script>
+            <script>
+                // Wait for the page to finish loading
+                window.addEventListener("load", function () {
+                    // Find the global-loader div
+                    var globalLoader = document.getElementById("global-loader");
+
+                    // Display the loader for 2 seconds, then hide it
+                    setTimeout(function () {
+                        globalLoader.style.display = "none";
+                    }, 1000); // 2000 milliseconds (2 seconds)
+                });
+            </script>
+
+            <div class="for-editor">
+                {% for category in product.categories.all %} {% if not forloop.last %}, {% endif %}
+
+                <br />
+                <a href="{% url 'giftweb:products_by_category' category_name=category.name %}">More profiles from {{ category.name }}{% if not forloop.last %}, {% endif %} {% endfor %} </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    <script src="{% static 'assetss/js/feather.min.js' %}"></script>
+
+    <script src="{% static 'assetss/js/jquery.slimscroll.min.js' %}"></script>
+
+
+    <script src="{% static 'assetss/plugins/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <script src="{% static 'assetss/plugins/select2/js/select2.min.js' %}"></script>
+
+    <script src="{% static 'assetss/js/script.js' %}"></script>
+{% endblock %}

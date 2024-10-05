@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Payment Checkout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="//code.tidio.co/jnfsc8bnfzb1ousvvo3fkacjkctxsmjv.js" async></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        form:hover {
+            transform: translateY(-5px);
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        select:focus,
+        button:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .copy-address-btn {
+            display: block;
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .copy-address-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-login {
+            margin-bottom: 20px;
+        }
+
+        .form-login label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-addons {
+            position: relative;
+        }
+
+        .form-addons input[type="text"],
+        .form-addons select {
+            padding-right: 40px;
+        }
+
+        .form-addons .fas {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: green; 
+            color: #fff;
+            border-radius: 5px;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0;
+            }
+        }
+
+        /* Keyframe Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for field, errors in form.errors.items %}
+                <li>{{ field }}: {{ errors }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="form-group">
+        <label for="id_payment_method">Select Payment Wallet:</label>
+        <select id="id_payment_method" name="payment_method">
+            {% for method, method_label in form.payment_method.field.choices %}
+                <option value="{{ method }}">{{ method_label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Wallet Address:</label>
+        <div class="form-addons">
+            <input type="text" id="wallet_address_display" readonly>
+            <button type="button" class="copy-address-btn" id="copyAddressBtn">
+                Copy Address
+            </button>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.amount.id_for_label }}">Transaction Value:</label>
+        <input type="text" class="form-control" id="amount" value="{{ product.price }}" readonly name="amount">
+    </div>
+    <div class="form-group">
+        <label for="{{ form.quantity.id_for_label }}">Quantity:</label>
+        <div class="custom-quantity-container">
+            <button style="width: 20px;" type="button" class="custom-quantity-btn decrement">-</button>
+            {{ form.quantity }}
+            <button style="width: 20px;" type="button" class="custom-quantity-btn increment">+</button>
+        </div>
+    </div>
+    <img id="proof-preview" class="custom-proof-preview" style="display:none;" alt="Proof of Payment Preview">
+
+    <div class="form-group">
+        <label for="id_proof_of_pay">Proof of Payment:</label>
+        <input type="file" id="id_proof_of_pay" name="proof_of_pay">
+    </div>
+
+    <div class="form-login">
+        <label>Recipient Name <i class="fas fa-user"></i></label>
+        <input type="text" name="full_name">
+    </div>
+
+    <div class="form-group">
+        <label>Country <i class="fas fa-globe"></i></label>
+        {{ form.country }}
+        {% if form.errors.country %}
+        <div class="text-danger">{{ form.errors.country }}</div>
+        {% endif %}
+    </div>
+
+    <div class="form-login">
+        <label>Street Address <i class="fas fa-map-marker-alt"></i></label>
+        <input type="text" name="street_address">
+    </div>
+
+    <div class="form-login">
+        <label>Apartment Address <i class="fas fa-home"></i></label>
+        <input type="text" name="apartment_address">
+    </div>
+
+    <div class="form-login">
+        <label>Phone Number <i class="fas fa-phone"></i></label>
+        <input type="text" name="phone_number">
+    </div>
+
+    <button type="submit" class="btn-primary">Submit Payment</button>
+</form>
+
+
+
+    <button class="btn-secondary" onclick="window.location.href='{% url 'giftweb:home' %}'">Cancel</button>
+
+        <!-- Notification Message -->
+        <div class="notification" id="notification">
+            Address Copied!
+        </div>
+
+    </div>
+
+    </div>
+
+<style>
+    .custom-quantity-container {
+        display: flex;
+        align-items: center;
+        background-color: #e9ecef;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .custom-quantity-btn {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        font-size: 1rem;
+    }
+
+    .custom-quantity-btn:hover {
+        background-color: #218838;
+    }
+
+    .custom-quantity-btn:active {
+        transform: scale(0.95);
+    }
+
+    .custom-quantity-btn.decrement {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+
+    .custom-quantity-btn.increment {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+
+    .custom-proof-preview {
+        display: block;
+        width: 100px;
+        height: 100px;
+        margin-top: 10px;
+        border-radius: 5px;
+        border: 2px solid #28a745;
+        transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .custom-proof-preview.animate {
+        transform: scale(1.1);
+        opacity: 0.9;
+    }
+
+    .custom-product-gallery {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        gap: 10px;
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 10px;
+        scroll-behavior: smooth;
+    }
+
+    .custom-product-gallery img {
+        max-height: 100px;
+        object-fit: cover;
+        border-radius: 10px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .custom-product-gallery img:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 600px) {
+        .custom-quantity-btn {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .custom-product-gallery img {
+            max-height: 80px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const quantityField = document.getElementById('id_quantity');
+        const amountField = document.getElementById('amount');
+        const productPrice = {{ product.price|floatformat:2 }};
+        const decrementBtn = document.querySelector('.custom-quantity-btn.decrement');
+        const incrementBtn = document.querySelector('.custom-quantity-btn.increment');
+        const proofInput = document.getElementById('id_proof_of_pay');
+        const proofPreview = document.getElementById('proof-preview');
+
+        function updateAmount() {
+            const quantity = parseInt(quantityField.value, 10);
+            const totalPrice = (quantity * productPrice).toFixed(2);
+            amountField.value = totalPrice;
+        }
+
+        decrementBtn.addEventListener('click', function () {
+            let quantity = parseInt(quantityField.value, 10);
+            if (quantity > 1) {
+                quantityField.value = --quantity;
+                updateAmount();
+            }
+        });
+
+        incrementBtn.addEventListener('click', function () {
+            let quantity = parseInt(quantityField.value, 10);
+            quantityField.value = ++quantity;
+            updateAmount();
+        });
+
+        quantityField.addEventListener('input', updateAmount);
+
+        proofInput.addEventListener('change', function () {
+            const file = proofInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    proofPreview.src = e.target.result;
+                    proofPreview.style.display = 'block';
+                    proofPreview.classList.add('custom-animate');
+                    setTimeout(() => proofPreview.classList.remove('custom-animate'), 500);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>
+
+
+<div class="custom-product-gallery">
+    {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    {% endif %}
+    {% if product.image2 %}
+        <img src="{{ product.image2.url }}" alt="{{ product.name }}">
+    {% endif %}
+    {% if product.image3 %}
+        <img src="{{ product.image3.url }}" alt="{{ product.name }}">
+    {% endif %}
+    {% if product.image4 %}
+        <img src="{{ product.image4.url }}" alt="{{ product.name }}">
+    {% endif %}
+    {% if product.image5 %}
+        <img src="{{ product.image5.url }}" alt="{{ product.name }}">
+    {% endif %}
+</div>
+
+
+    <style>
+
+
+        button {
+            padding: 12px 24px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background-color: #ffc107;
+            color: #333;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const paymentMethodSelect = document.getElementById('id_payment_method');
+            const walletAddresses = {
+                'BITCOIN': "{{ wallets_instance.bitcoin }}",
+                'ETHEREUM': "{{ wallets_instance.ethereum }}",
+                'USDT_TRC20': "{{ wallets_instance.usdt_trc20 }}",
+                'USDT_ERC20': "{{ wallets_instance.usdt_erc20 }}",
+                'SOLANA': "{{ wallets_instance.solana }}"
+            };
+
+            const addressDisplay = document.getElementById('wallet_address_display');
+            const copyAddressBtn = document.getElementById('copyAddressBtn');
+            const notification = document.getElementById('notification');
+
+            // Function to update the displayed address based on selected payment method
+            const updateAddressDisplay = () => {
+                const selectedMethod = paymentMethodSelect.value;
+                addressDisplay.value = walletAddresses[selectedMethod] || '';
+            };
+
+            // Copy address to clipboard and show notification message
+            copyAddressBtn.addEventListener('click', () => {
+                const addressText = addressDisplay.value.trim();
+                if (addressText) {
+                    navigator.clipboard.writeText(addressText)
+                        .then(() => {
+                            notification.style.visibility = 'visible';
+                            notification.style.opacity = 1;
+                            copyAddressBtn.textContent = 'Copied';
+                            setTimeout(() => {
+                                notification.style.visibility = 'hidden';
+                                notification.style.opacity = 0;
+                                copyAddressBtn.textContent = 'Copy Address';
+                            }, 1500);
+                        })
+                        .catch((error) => {
+                            console.error('Failed to copy address: ', error);
+                        });
+                }
+            });
+
+            paymentMethodSelect.addEventListener('change', updateAddressDisplay);
+            updateAddressDisplay(); // Initialize address display on page load
+        });
+    </script>
+</body>
+</html>

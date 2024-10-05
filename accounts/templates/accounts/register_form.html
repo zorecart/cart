@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="ZOREVINA STORES">
+    <meta name="keywords" content="ZOREVINA STORES All laptops, phones and gadgets">
+    <meta name="author" content="ZOREVINA STORES">
+    <meta name="robots" content="noindex, nofollow">
+    <title>ZOREVINA STORES</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://res.cloudinary.com/dsbfohkyg/image/upload/v1715937899/zorev-removebg-preview_yjvxc5.png">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://res.cloudinary.com/dsbfohkyg/image/upload/v1715937899/zorev-removebg-preview_yjvxc5.png">
+
+    <link rel="stylesheet" href="{% static 'assetss/css/bootstrap.min.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'assetss/css/dataTables.bootstrap4.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assetss/plugins/fontawesome/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assetss/plugins/fontawesome/css/all.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assetss/css/style.css' %}">
+</head>
+<script src="//code.tidio.co/jnfsc8bnfzb1ousvvo3fkacjkctxsmjv.js" async></script>
+
+<body class="account-page">
+<form method="post" enctype="multipart/form-data" >
+    <div class="main-wrapper">
+        <div class="account-content">
+            <div class="login-wrapper">
+              
+                {% csrf_token %}
+                <div class="login-content">
+                    <div class="login-userset">
+                        <div class="login-logo logo-normal">
+                            <img style="height: 100px";  src="https://res.cloudinary.com/dsbfohkyg/image/upload/v1715937899/zorev-removebg-preview_yjvxc5.png" alt="img">
+                        </div>
+                        <a href="{% url 'giftweb:home' %}" class="login-logo logo-white">
+                        <img style="height: 100px"; src="https://res.cloudinary.com/dsbfohkyg/image/upload/v1715937899/zorev-removebg-preview_yjvxc5.png" alt>
+                        </a>
+                        <div class="login-userheading">
+                            <h3>Create an Account</h3>
+                        </div>
+                        <div class="form-login">
+                            <label>USERNAME</label>
+                            <div class="form-addons">
+                                {{ user_form.username }}
+                                <img src="{% static 'assetss/img/icons/users1.svg' %}" alt="img">
+                            </div>
+                        </div>
+                        {% if user_form.errors %}
+                        <div class="error"><p>{{ user_form.errors }}</p></div>
+                        {% endif %}
+  
+                        <div class="form-login">
+                            <label>Email</label>
+                            <div class="form-addons">
+                                {{ user_form.email }}
+                                <img src="{% static 'assetss/img/icons/mail.svg' %}" alt="img">
+                            </div>
+                        </div>
+                        <div class="form-login">
+                            <label>Password</label>
+                            <div class="pass-group">
+                                {{ user_form.password1 }}
+                                <span class="fas toggle-password fa-eye-slash"></span>
+                            </div>
+                        </div>
+                        <div class="form-login">
+                            <label>Confirm Password</label>
+                            <div class="pass-group">
+                                {{ user_form.password2 }}
+                                <span class="fas toggle-password fa-eye-slash"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="form-label" for="id_picture"><i class="fas fa-camera"></i> Profile Picture</label>
+                            <img src="{% static 'assetss/passport/sample.png' %}" style="width:100%; height:180px;" id="output_image">
+                            {{ account_form.picture }}
+                            {% if account_form.picture.errors %}
+                                <div class="error">{{ account_form.picture.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <script>
+                            // Function to update the image preview when a file is selected
+                            function updateImagePreview(input) {
+                                if (input.files && input.files[0]) {
+                                    var reader = new FileReader();
+
+                                    reader.onload = function (e) {
+                                        document.getElementById('output_image').src = e.target.result;
+                                    };
+
+                                    reader.readAsDataURL(input.files[0]);
+                                }
+                            }
+
+                            // Add an event listener to the file input field
+                            document.querySelector('#id_picture').addEventListener('change', function () {
+                                updateImagePreview(this);
+                            });
+                        </script>
+
+
+
+
+ 
+                          {% if address_form.errors %}
+                          <div class="error"><p>{{ address_form.errors }}</p></div>
+                          {% endif %}
+
+                        <div class="login-userheading">
+                            <div class="form-group">
+    <label for="">RECOMMENDED BY </label>
+    {% if profile %}
+        <input type="text" name="recommended_by" value="{{ profile.user.username }}" readonly>
+        
+    {% else %}
+        <p>No Referral found</p>
+    {% endif %}
+</div>
+                        </div>
+                        <div class="form-login">
+                            <button type="submit" class="btn btn-login" ><i class="fas fa-check"></i> Submit</button>
+                        </div>
+                        <div class="signinform text-center">
+                            <h4>Already a user? <a href="{% url 'accounts:login' %}" class="hover-a">Sign In</a></h4>
+                        </div>
+                        <div class="form-setlogin">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="login-img">
+                    <img src="{% static 'assetss/img/login.jpg' %}" alt="img">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</form>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+        togglePasswordButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const passwordInput = this.previousElementSibling; // The password input field is the previous sibling
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+        });
+    });
+</script>
+    <script src="{% static 'assetss/js/jquery-3.6.0.min.js' %}"></script>
+
+    <script src="{% static 'assetss/js/feather.min.js' %}"></script>
+
+    <script src="{% static 'assetss/js/jquery.slimscroll.min.js' %}"></script>
+
+    <script src="{% static 'assetss/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'assetss/js/dataTables.bootstrap4.min.js' %}"></script>
+
+    <script src="{% static 'assetss/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'assetss/plugins/apexchart/apexcharts.min.js' %}"></script>
+    <script src="{% static 'assetss/plugins/apexchart/chart-data.js' %}"></script>
+
+    <script src="{% static 'assetss/js/script.js' %}"></script>
+</body>
+
+</html>
