@@ -3,26 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome </title>
+    <title>Welcome to Zorevina Cart - Your Ultimate Shopping Destination!</title>
     <style>
-        body,
-        table,
-        td,
-        a {
+        body, table, td, a {
             -ms-text-size-adjust: 100%;
             -webkit-text-size-adjust: 100%;
         }
-
-        table,
-        td {
+        table, td {
             mso-table-rspace: 0pt;
             mso-table-lspace: 0pt;
         }
-
         img {
             -ms-interpolation-mode: bicubic;
         }
-
         a[x-apple-data-detectors] {
             font-family: inherit !important;
             font-size: inherit !important;
@@ -31,98 +24,102 @@
             color: inherit !important;
             text-decoration: none !important;
         }
-
         div[style*="margin: 16px 0;"] {
             margin: 0 !important;
         }
-
         body {
             width: 100% !important;
             height: 100% !important;
             padding: 0 !important;
             margin: 0 !important;
-            background-color: #e9ecef;
+            background-color: #FFF5E6;
         }
-
         table {
             border-collapse: collapse !important;
             max-width: 600px;
             margin: 20px auto;
         }
-
-        h2 {
-            color: #007bff;
+        h1, h2 {
+            color: #FF6600;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         p {
             color: #333;
+            font-family: 'Arial', sans-serif;
         }
-
         .card {
             background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(255, 102, 0, 0.1);
         }
-
         .hero img {
             display: block;
             width: 100%;
             max-width: 100%;
+            border-radius: 12px 12px 0 0;
         }
-
         .copy-block {
-            padding: 24px;
-            font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+            padding: 32px;
+            font-family: 'Arial', sans-serif;
             font-size: 16px;
             line-height: 24px;
             background-color: #ffffff;
         }
-
         h1 {
-            margin: 0 0 12px;
-            font-size: 32px;
-            font-weight: 400;
+            margin: 0 0 16px;
+            font-size: 36px;
+            font-weight: 700;
             line-height: 48px;
         }
-
         .button {
             display: inline-block;
             padding: 16px 36px;
-            font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-            font-size: 16px;
+            font-family: 'Arial', sans-serif;
+            font-size: 18px;
+            font-weight: bold;
             color: #ffffff;
             text-decoration: none;
-            border-radius: 6px;
-            background-color: #1a82e2;
+            border-radius: 50px;
+            background-color: #FF6600;
+            transition: background-color 0.3s ease;
         }
-
+        .button:hover {
+            background-color: #E65C00;
+        }
         .signature {
-            padding: 24px;
-            font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+            padding: 32px;
+            font-family: 'Arial', sans-serif;
             font-size: 16px;
             line-height: 24px;
-            border-bottom: 3px solid #d4dadf;
+            border-bottom: 3px solid #FFD1A8;
+            background-color: #FFF5E6;
         }
-
         .permission {
-            padding: 12px 24px;
-            font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+            padding: 16px 32px;
+            font-family: 'Arial', sans-serif;
             font-size: 14px;
             line-height: 20px;
             color: #666;
+            background-color: #FFF5E6;
+        }
+        .social-icons {
+            padding-top: 16px;
+        }
+        .social-icons a {
+            display: inline-block;
+            margin: 0 8px;
         }
     </style>
 </head>
 <body>
-
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr>
-            <td align="center" bgcolor="#e9ecef">
+            <td align="center" bgcolor="#FFF5E6">
                 <table border="0" cellpadding="0" cellspacing="0" width="40%" style="height: 80px;">
                     <tr>
-                        <td align="center" valign="top" style="padding: 10px 7px;">
-                            <a  target="_blank" rel="noopener noreferrer" style="display: inline-block;">
-                                <img src="https://res.cloudinary.com/dsbfohkyg/image/upload/v1715937899/zorev-removebg-preview_yjvxc5.png" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px; padding-bottom: 4px;">
+                        <td align="center" valign="top" style="padding: 20px 0;">
+                            <a href="#" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+                                <img src="https://res.cloudinary.com/dsbfohkyg/image/upload/v1715937899/zorev-removebg-preview_yjvxc5.png" alt="Zorevina Cart Logo" border="0" width="80" style="display: block; width: 80px; max-width: 80px; min-width: 80px;">
                             </a>
                         </td>
                     </tr>
@@ -130,28 +127,34 @@
             </td>
         </tr>
 
-
-
         <tr>
-            <td align="center" bgcolor="#e9ecef">
+            <td align="center" bgcolor="#FFF5E6">
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" class="card">
                     <tr>
-                        <td bgcolor="#ffffff" align="left" class="copy-block">
-                            <h1>Welcome, {{ user.username }}!</h1>
-                            <p>Sure, here's an updated version that emphasizes the online store aspect:
-                                Thank you for choosing Zorevina Cart Online Store, where design meets excellence! By shopping with us, you gain access to premium products and outstanding services. Don't forget to use your referral link to invite friends and family—you can earn up to a 30% discount on each purchase they make. Happy shopping!</p>
+                        <td bgcolor="#FF6600" align="center" class="hero">
+                            <img src="/api/placeholder/600/300" alt="Welcome to Zorevina Cart" width="600" style="display: block; border-radius: 12px 12px 0 0;">
                         </td>
                     </tr>
-
+                    <tr>
+                        <td bgcolor="#ffffff" align="left" class="copy-block">
+                            <h1>Welcome to Zorevina Cart, {{ user.username }}!</h1>
+                            <p>
+                                Get ready for an extraordinary shopping adventure! You've just unlocked a world of incredible deals, top-notch products, and unparalleled service. At Zorevina Cart, we're not just an online store – we're your gateway to a lifestyle upgrade!
+                            </p>
+                            <p>
+                                🎉 Exciting news: Share the joy with friends and family using your unique referral link, and you could score up to a whopping 30% discount on their purchases. It's our way of saying thanks for spreading the Zorevina love!
+                            </p>
+                        </td>
+                    </tr>
                     <tr>
                         <td align="left" bgcolor="#ffffff">
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
-                                    <td align="center" bgcolor="#ffffff" style="padding: 6px;">
+                                    <td align="center" bgcolor="#ffffff" style="padding: 24px;">
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
-                                                <td align="center" bgcolor="#1a82e2" style="border-radius: 6px;">
-                                                    <a target="_blank" rel="noopener noreferrer" class="button">Enjoy</a>
+                                                <td align="center" bgcolor="#FF6600" style="border-radius: 50px;">
+                                                    <a href="#" target="_blank" rel="noopener noreferrer" class="button">Start Shopping Now!</a>
                                                 </td>
                                             </tr>
                                         </table>
@@ -161,49 +164,48 @@
                         </td>
                     </tr>
                     <tr>
-                        <td align="left" bgcolor="#ffffff" class="signature">
-                            <p>Explore our diverse range of items:</p>
+                        <td align="left" bgcolor="#FFF5E6" class="signature">
+                            <h2>Discover Our Treasure Trove:</h2>
                             <ul>
-                                <li>Electronics</li>
-                                <li>Automobiles</li>
-                                <li>Apparel</li>
-                                <li>Footwear</li>
-                                <li>Home Appliances</li>
-                                <li>Furniture</li>
-                                <li>Toys and Games</li>
-                                <li>Sports Equipment</li>
-                                <li>and many more</li>
-
+                                <li>🖥️ Cutting-edge Electronics</li>
+                                <li>🚗 Stylish Automobiles</li>
+                                <li>👚 Trendsetting Apparel</li>
+                                <li>👟 Fashionable Footwear</li>
+                                <li>🏠 Smart Home Appliances</li>
+                                <li>🛋️ Chic Furniture</li>
+                                <li>🎮 Thrilling Toys and Games</li>
+                                <li>⚽ Top-tier Sports Equipment</li>
+                                <li>✨ And so much more!</li>
+                            </ul>
+                            <p>Your journey to amazing finds starts now. Happy shopping!</p>
                         </td>
                     </tr>
-
                 </table>
             </td>
         </tr>
 
         <tr>
-            <td align="center" bgcolor="#e9ecef" style="padding: 4px;">
-                <table border="0" cellpadding="0" cellspacing="0" width="60%" style="height: 130px; ">
-
+            <td align="center" bgcolor="#FFF5E6" style="padding: 24px;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
-                        <td style="padding-top: 4px;" align="center" bgcolor="#e9ecef" class="permission">
-                            <p>Need assistance? Don't hesitate to contact us at <strong style="font-weight:bold;">support@zorevinacart.store</strong> for real-time assistance.</p>
+                        <td align="center" bgcolor="#FFF5E6" class="permission">
+                            <p>Need a shopping sidekick? Our customer happiness team is always ready to assist! Reach out to us at <strong style="color: #FF6600;">support@zorevinacart.store</strong> for VIP treatment.</p>
                         </td>
                     </tr>
-
                     <tr>
-                        <td align="center" bgcolor="#e9ecef" class="permission">
-                            <p>We Promise To Give You The best</p>
-                            <p>⭐ Zorevina Cart Online Store  ⭐ </p>
-                             <img src="https://res.cloudinary.com/dsbfohkyg/image/upload/v1715937899/zorev-removebg-preview_yjvxc5.png" alt="Welcome"  style="display: block; width: 118px; max-width: 118px; min-width: 118px;">
-
+                        <td align="center" bgcolor="#FFF5E6" class="permission">
+                            <p style="font-weight: bold; color: #FF6600;">Elevate Your Shopping Experience with Zorevina Cart!</p>
+                            <img src="https://res.cloudinary.com/dsbfohkyg/image/upload/v1715937899/zorev-removebg-preview_yjvxc5.png" alt="Zorevina Cart" style="display: block; width: 100px; max-width: 100px; min-width: 100px; margin: 16px auto;">
+                            <div class="social-icons">
+                                <a href="#" target="_blank"><img src="/api/placeholder/32/32" alt="Facebook" width="32" height="32"></a>
+                                <a href="#" target="_blank"><img src="/api/placeholder/32/32" alt="Instagram" width="32" height="32"></a>
+                                <a href="#" target="_blank"><img src="/api/placeholder/32/32" alt="Twitter" width="32" height="32"></a>
+                            </div>
                         </td>
                     </tr>
-
                 </table>
             </td>
         </tr>
     </table>
-
 </body>
 </html>
